@@ -8,7 +8,7 @@
         <router-link to="movies/"></router-link>
       </span>
     </div>
-    <router-view />
+    <router-view @login="loginCheck" />
   </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
     return {
       isLogin: false,
     };
+  },
+  methods: {
+    loginCheck: function () {
+      this.isLogin = true;
+    },
   },
   created: function () {
     const token = localStorage.getItem("jwt");

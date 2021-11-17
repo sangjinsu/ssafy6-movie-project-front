@@ -1,5 +1,8 @@
 <template>
   <div>
+    <span>
+      <router-link :to="{ name: 'Signup' }">Signup</router-link>
+    </span>
     <h1>Login</h1>
     <div>
       <label for="username">name: </label>

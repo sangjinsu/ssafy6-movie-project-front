@@ -1,12 +1,34 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/movies">Movies</router-link>
+      <span v-if="!isLogin">
+        <router-link to="/"></router-link>
+      </span>
+      <span v-else>
+        <router-link to="movies/"></router-link>
+      </span>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      isLogin: false,
+    };
+  },
+  created: function () {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      this.isLogin = true;
+    }
+  },
+};
+</script>
 
 <style>
 #app {

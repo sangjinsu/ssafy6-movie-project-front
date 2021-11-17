@@ -86,6 +86,12 @@ const routes = [
     component: Recommend,
     beforeEnter: beforeAuth(true),
   },
+  {
+    path: '/*',
+    name: 'Extra',
+    component: Home,
+    beforeEnter: beforeAuth(false),
+  },
 ]
 
 const router = new VueRouter({

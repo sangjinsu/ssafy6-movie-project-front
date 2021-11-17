@@ -1,75 +1,97 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "@/views/accounts/Login.vue";
-import Profile from "@/views/accounts/Profile.vue";
-import Signup from "@/views/accounts/Signup.vue";
-import CreateReview from "@/views/community/CreateReview.vue";
-import ReviewItem from "@/views/community/ReviewItem.vue";
-import MovieItem from "@/views/movies/MovieItem.vue";
-import Movies from "@/views/movies/Movies.vue";
-import Recommend from "@/views/movies/Recommend.vue";
-import Research from "@/views/movies/Research.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Login from '@/views/accounts/Login.vue'
+import Profile from '@/views/accounts/Profile.vue'
+import Signup from '@/views/accounts/Signup.vue'
+import CreateReview from '@/views/community/CreateReview.vue'
+import ReviewItem from '@/views/community/ReviewItem.vue'
+import MovieItem from '@/views/movies/MovieItem.vue'
+import Movies from '@/views/movies/Movies.vue'
+import Recommend from '@/views/movies/Recommend.vue'
+import Research from '@/views/movies/Research.vue'
 
-Vue.use(VueRouter);
+import store from '../store'
+
+const beforeAuth = (isAuth) => (from, to, next) => {
+  const isLogin = store.getters['isLogin']
+  if ((isLogin && isAuth) || (!isLogin && !isAuth)) {
+    return next()
+  } else {
+    // 회원가입 화면으로 이동
+    next('/signup')
+  }
+}
+
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home,
+    beforeEnter: beforeAuth(false),
   },
   {
-    path: "/signup",
-    name: "Signup",
+    path: '/signup',
+    name: 'Signup',
     component: Signup,
+    beforeEnter: beforeAuth(false),
   },
   {
-    path: "/login",
-    name: "Login",
+    path: '/login',
+    name: 'Login',
     component: Login,
+    beforeEnter: beforeAuth(false),
   },
   {
-    path: "/profile",
-    name: "Profile",
+    path: '/profile',
+    name: 'Profile',
     component: Profile,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "review/:review_id",
-    name: "ReviewItem",
+    path: 'review/:review_id',
+    name: 'ReviewItem',
     component: ReviewItem,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "/createreview",
-    name: "CreateReview",
+    path: '/createreview',
+    name: 'CreateReview',
     component: CreateReview,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "/movies",
-    name: "Movies",
+    path: '/movies',
+    name: 'Movies',
     component: Movies,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "/research",
-    name: "Research",
+    path: '/research',
+    name: 'Research',
     component: Research,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "/movies/:movie_id",
-    name: "MovieItem",
+    path: '/movies/:movie_id',
+    name: 'MovieItem',
     component: MovieItem,
+    beforeEnter: beforeAuth(true),
   },
   {
-    path: "/recommend",
-    name: "Recommend",
+    path: '/recommend',
+    name: 'Recommend',
     component: Recommend,
+    beforeEnter: beforeAuth(true),
   },
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes,
-});
+})
 
-export default router;
+export default router

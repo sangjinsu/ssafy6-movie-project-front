@@ -8,29 +8,19 @@
         <router-link to="movies/"></router-link>
       </span>
     </div>
-    <router-view @login="loginCheck" />
+    <router-view/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "App",
   data: function () {
     return {
-      isLogin: false,
+      ...mapGetters(['isLogin'])
     };
-  },
-  methods: {
-    loginCheck: function () {
-      this.isLogin = true;
-    },
-  },
-  created: function () {
-    const token = localStorage.getItem("jwt");
-
-    if (token) {
-      this.isLogin = true;
-    }
   },
 };
 </script>

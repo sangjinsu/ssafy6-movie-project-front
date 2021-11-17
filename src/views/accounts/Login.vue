@@ -10,7 +10,7 @@
     </div>
     <div>
       <label for="password">password: </label>
-      <input type="password" id="password" v-model="credentials.password" />
+      <input type="password" @keyup.enter="login" id="password" v-model="credentials.password" />
       <button @click="login">login</button>
     </div>
   </div>
@@ -38,8 +38,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          localStorage.setItem("jwt", res.data.token);
-          this.$emit("login");
+          this.$store.dispatch('login', res.data.token)
           this.$router.push({ name: "Movies" });
         })
         .catch((err) => {

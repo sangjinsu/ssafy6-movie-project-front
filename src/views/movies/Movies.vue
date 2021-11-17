@@ -11,8 +11,8 @@ export default {
   name: "Movies",
   methods: {
     logout: function () {
-      localStorage.removeItem("jwt");
-      this.$router.push({ name: "Home" });
+      this.$store.dispatch('logout')
+      this.$router.push({name: 'Signup'})
     },
   },
 };

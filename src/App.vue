@@ -8,18 +8,18 @@
         <router-link to="movies/"></router-link>
       </span>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
   data: function () {
     return {
-      ...mapGetters(['isLogin'])
+      ...mapGetters(["isLogin"]),
     };
   },
 };
@@ -33,6 +33,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-
 </style>

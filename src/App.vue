@@ -1,26 +1,24 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <span v-if="!isLogin">
-        <router-link to="/"></router-link>
-      </span>
-      <span v-else>
-        <router-link to="movies/"></router-link>
-      </span>
+  <div>
+    <div id="app">
+      <movie-nav v-if="isLogin"></movie-nav>
+      <router-view />
     </div>
-    <router-view />
   </div>
+
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import MovieNav from "@/components/layout/MovieNav";
 
 export default {
   name: "App",
-  data: function () {
-    return {
-      ...mapGetters(["isLogin"]),
-    };
+  components: {
+    MovieNav
+  },
+  computed: {
+    ...mapGetters(["isLogin"]),
   },
 };
 </script>

@@ -1,20 +1,21 @@
 <template>
-  <div>
     <b-navbar type="dark" variant="dark" class="nav fixed-top">
       <b-navbar-nav>
-        <b-nav-item href="/">Home</b-nav-item>
+        <b-nav-item> 
+         <router-link to="/movies" class="text-decoration-none">Home</router-link>
+        </b-nav-item>
 
         <!-- Navbar dropdowns -->
         <b-nav-item-dropdown text="Menu" right>
-          <router-link to="/movies" class="text-decoration-none"
-            ><b-dropdown-item>Home</b-dropdown-item></router-link
-          >
-          <router-link to="/search" class="text-decoration-none"
-            ><b-dropdown-item>Search</b-dropdown-item></router-link
-          >
-          <router-link to="/recommend" class="text-decoration-none"
-            ><b-dropdown-item>Recommend</b-dropdown-item></router-link
-          >
+          <b-dropdown-item><router-link to="/movies" class="text-decoration-none"
+            >Home</router-link
+          ></b-dropdown-item>
+          <b-dropdown-item><router-link to="/research" class="text-decoration-none"
+            >Search</router-link
+          ></b-dropdown-item>
+          <b-dropdown-item><router-link to="/recommend" class="text-decoration-none"
+            >Recommend</router-link
+          ></b-dropdown-item>
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown text="User" right>
@@ -24,7 +25,6 @@
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
-  </div>
 </template>
 
 <script>

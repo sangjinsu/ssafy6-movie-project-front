@@ -1,7 +1,8 @@
 <template>
   <div>
+    <!-- 
     <div>
-      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+      <b-dropdown  id="dropdown-1" text="Dropdown Button" class="m-md-2">
         <b-dropdown-item @click="research(28)">액션</b-dropdown-item>
         <b-dropdown-item @click="research(12)">모험</b-dropdown-item>
         <b-dropdown-item @click="research(16)">애니메이션</b-dropdown-item>
@@ -28,6 +29,14 @@
         alt="poster"
       />
     </div>
+    -->
+    <v-select v-model="selected" :options="options"></v-select>
+    <div v-for="movie in movies" :key="movie.id">
+      <img
+        :src="`https://image.tmdb.org/t/p/w200/${movie.poster_path}`"
+        alt="poster"
+      />
+    </div>
   </div>
 </template>
 
@@ -38,8 +47,34 @@ export default {
   name: "Research",
   data: function () {
     return {
-      Movies: null,
+      movies: this.$store.getters['getLastestMovies'],
+      selected: '장르',
+      options: [
+        {label: '액션', id: 28},
+        {label: '모험', id:12},
+        {label: '애니메이션', id:16},
+        {label: '범죄', id:80},
+        {label: '다큐멘터리', id:99},
+        {label: '드라마', id:18},
+        {label: '가족', id:10751},
+        {label: '판타지', id:14},
+        {label: '역사', id:36},
+        {label: '공포', id:27},
+        {label: '음악', id:10402},
+        {label: '미스터리', id:9648},
+        {label: '로맨스', id:10749},
+        {label: 'SF', id:878},
+        {label: 'TV 영화', id:10770},
+        {label: '스릴러', id:53},
+        {label: '전쟁', id:10752},
+        {label: '서부', id:37},
+      ]
     };
+  },
+  watch: {
+    selected(){
+      this.research(this.selected.id)
+    }
   },
   methods: {
     research: function (genres) {
@@ -49,8 +84,7 @@ export default {
         headers: this.$store.getters["setToken"],
       })
         .then((res) => {
-          console.log(res.data);
-          this.Movies = res.data;
+          this.movies = res.data;
         })
         .catch((err) => {
           console.log(err);
@@ -60,4 +94,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

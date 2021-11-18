@@ -1,38 +1,26 @@
 <template>
-  <b-navbar type="dark" variant="dark" class="nav">
-    <b-navbar-nav>
-      <b-nav-item>
-        <router-link to="/movies" class="text-decoration-none"
-          >Home</router-link
-        >
-      </b-nav-item>
-
-      <!-- Navbar dropdowns -->
-      <b-nav-item-dropdown text="Menu" right>
-        <b-dropdown-item
-          ><router-link to="/movies" class="text-decoration-none"
-            >Home</router-link
-          ></b-dropdown-item
-        >
-        <b-dropdown-item
-          ><router-link to="/research" class="text-decoration-none"
-            >Search</router-link
-          ></b-dropdown-item
-        >
-        <b-dropdown-item
-          ><router-link to="/recommend" class="text-decoration-none"
-            >Recommend</router-link
-          ></b-dropdown-item
-        >
+  <div>
+    <b-nav small class="navbar navbar-expand-md bg-dark fw-bold" align="right">
+      <b-nav-item to="/movies" class="text-decoration-none">Home</b-nav-item>
+      <b-nav-item to="/research" class="text-decoration-none"
+        >Search</b-nav-item
+      >
+      <b-nav-item to="/recommend" class="text-decoration-none"
+        >Recommend</b-nav-item
+      >
+      <b-nav-item-dropdown
+        id="my-nav-dropdown"
+        text="User"
+        toggle-class="nav-link-custom"
+        right
+      >
+        <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
+        <b-dropdown-item href="/profile">프로필</b-dropdown-item>
+        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-item href="#">회원탈퇴</b-dropdown-item>
       </b-nav-item-dropdown>
-
-      <b-nav-item-dropdown text="User" right>
-        <b-dropdown-item href="/profile">Profile</b-dropdown-item>
-        <b-dropdown-item @click="logout">Logout</b-dropdown-item>
-        <b-dropdown-item href="#">Sign out</b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
-  </b-navbar>
+    </b-nav>
+  </div>
 </template>
 
 <script>
@@ -47,4 +35,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a.nav-link {
+  color: white;
+}
+.nav-link:focus {
+  color: gray;
+}
+</style>

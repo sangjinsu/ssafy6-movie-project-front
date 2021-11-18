@@ -10,6 +10,7 @@ import MovieItem from '@/views/movies/MovieItem.vue'
 import Movies from '@/views/movies/Movies.vue'
 import Recommend from '@/views/movies/Recommend.vue'
 import Research from '@/views/movies/Research.vue'
+import MovieList from '@/views/movies/MovieList.vue'
 
 import store from '../store'
 
@@ -66,6 +67,12 @@ const routes = [
     path: '/movies',
     name: 'Movies',
     component: Movies,
+    beforeEnter: beforeAuth(true),
+  },
+  {
+    path: '/list',
+    name: 'MoviesList',
+    component: MovieList,
     beforeEnter: beforeAuth(true),
   },
   {

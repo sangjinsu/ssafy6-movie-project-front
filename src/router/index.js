@@ -13,8 +13,14 @@ import Research from '@/views/movies/Research.vue'
 
 import store from '../store'
 
-const beforeAuth = (isAuth) => (from, to, next) => {
+const beforeAuth = (isAuth) => (to, from, next) => {
   const isLogin = store.getters['isLogin']
+  if (
+    isLogin &&
+    (to.name === 'Home' || to.name === 'Login' || to.name === 'Signup')
+  ) {
+    return next('/movies')
+  }
   if ((isLogin && isAuth) || (!isLogin && !isAuth)) {
     return next()
   } else {

@@ -2,7 +2,7 @@
   <div>
     <b-nav
       small
-      class="navbar navbar-expand-md bg-dark fw-bold d-flex bd-highlight mb-4"
+      class="navbar-expand-md bg-dark fw-bold d-flex bd-highlight mb-4"
     >
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
         >Home</b-nav-item
@@ -13,6 +13,10 @@
       <b-nav-item to="/recommend" class="text-decoration-none p-2 bd-highlight"
         >Recommend</b-nav-item
       >
+      <!-- <b-form style="text-align: center">
+        <b-form-input></b-form-input>
+      </b-form> -->
+
       <b-nav-item-dropdown
         id="my-nav-dropdown"
         text="User"
@@ -45,7 +49,7 @@ export default {
 a.nav-link {
   color: white;
 }
-.nav-link:focus {
-  color: gray;
+.navbar-brand {
+  margin-left: 16px;
 }
 </style>

@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <div id="app">
-      <movie-nav v-if="isLogin"></movie-nav>
-      <router-view />
-    </div>
+  <div id="app">
+    <movie-nav v-if="isLogin"></movie-nav>
+    <router-view />
   </div>
-
 </template>
 
 <script>
@@ -15,7 +12,7 @@ import MovieNav from "@/components/layout/MovieNav";
 export default {
   name: "App",
   components: {
-    MovieNav
+    MovieNav,
   },
   computed: {
     ...mapGetters(["isLogin"]),

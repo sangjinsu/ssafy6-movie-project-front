@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-nav small class="navbar navbar-expand-md bg-dark fw-bold" align="right">
+    <b-nav small class="navbar navbar-expand-md bg-dark fw-bold">
       <b-nav-item to="/movies" class="text-decoration-none">Home</b-nav-item>
       <b-nav-item to="/research" class="text-decoration-none"
         >Search</b-nav-item

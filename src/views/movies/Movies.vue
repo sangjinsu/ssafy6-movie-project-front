@@ -1,25 +1,22 @@
 <template>
-  <div>
-    <div
-      v-for="(movieList, index) in movieLists"
-      :key="index"
-      class="d-flex justify-content-center"
-    >
-      <movie-image v-for="movie in movieList" :key="movie.id" :movie="movie">
-      </movie-image>
-    </div>
-  </div>
+  <b-container>
+      <top-movie-image-list :movieList="topMovies"></top-movie-image-list>
+      <movie-image-list :movieList="getLastestMovies"></movie-image-list>
+      <movie-image-list :movieList="likeMovies"></movie-image-list>
+      <movie-image-list :movieList="pickMovies"></movie-image-list>
+  </b-container>
 </template>
 
 <script>
 import axios from "axios";
-import MovieImage from "@/components/MovieImage.vue";
+import MovieImageList from "@/components/MovieImageList.vue";
+import TopMovieImageList from "@/components/TopMovieImageList.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Movies",
   components: {
-    MovieImage,
+   MovieImageList, TopMovieImageList
   },
   data() {
     return {
@@ -29,14 +26,6 @@ export default {
     };
   },
   computed: {
-    movieLists() {
-      return [
-        this.topMovies,
-        this.getLastestMovies,
-        this.likeMovies,
-        this.pickMovies,
-      ];
-    },
     ...mapGetters(["getLastestMovies"]),
   },
   created() {

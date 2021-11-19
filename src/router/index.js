@@ -60,6 +60,7 @@ const routes = [
     path: "/review/:review_id",
     name: "ReviewItem",
     component: ReviewItem,
+    props: true,
     beforeEnter: beforeAuth(true),
   },
   {

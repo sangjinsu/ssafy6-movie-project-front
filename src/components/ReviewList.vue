@@ -3,15 +3,26 @@
     <p>
       <button @click="createReview">작성</button>
     </p>
-    <p
-      v-for="moviereview in movieReviews"
-      :key="moviereview.id"
-      @click="pushReviewItem"
-    >
-      {{ moviereview.title }}
-      {{ moviereview.content }}
-      {{ moviereview.rank }}
-    </p>
+    <div>
+      <b-card-group deck>
+        <b-card
+          style="max-width: 20rem"
+          bg-variant="dark"
+          header="Dark"
+          text-variant="white"
+          class="text-center"
+          v-for="review in Reviews"
+          :key="review.pk"
+          @click="pushReviewItem(review.pk)"
+        >
+          <b-card-text>
+            {{ review.title }}
+            {{ review.content }}
+            {{ review.rank }}
+          </b-card-text>
+        </b-card>
+      </b-card-group>
+    </div>
   </div>
 </template>
 
@@ -22,17 +33,17 @@ export default {
   name: "ReviewList",
   data: function () {
     return {
-      movieReviews: [],
+      Reviews: [],
     };
   },
   methods: {
     createReview() {
       this.$emit("create-review");
     },
-    pushReviewItem() {
+    pushReviewItem(pk) {
       this.$router.push({
         name: "ReviewItem",
-        params: { review_id: `${this.moviewreview.pk}` },
+        params: { review_id: pk },
       });
     },
   },
@@ -44,7 +55,7 @@ export default {
     })
       .then((res) => {
         console.log(res.data);
-        this.movieReviews = res.data;
+        this.Reviews = res.data;
       })
       .catch((err) => console.log(err));
   },

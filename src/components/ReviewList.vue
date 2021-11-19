@@ -5,22 +5,24 @@
     </p>
     <div>
       <b-card-group deck>
-        <b-card
-          style="max-width: 20rem"
-          bg-variant="dark"
-          header="Dark"
-          text-variant="white"
-          class="text-center"
-          v-for="review in Reviews"
-          :key="review.pk"
-          @click="pushReviewItem(review.pk)"
-        >
-          <b-card-text>
-            {{ review.title }}
-            {{ review.content }}
-            {{ review.rank }}
-          </b-card-text>
-        </b-card>
+        <b-row>
+          <b-card
+            style="max-width: 20rem"
+            bg-variant="dark"
+            header="Dark"
+            text-variant="white"
+            class="text-center"
+            v-for="review in Reviews"
+            :key="review.pk"
+            @click="pushReviewItem(review.pk)"
+          >
+            <b-card-text>
+              {{ review.title }}
+              {{ review.content }}
+              {{ review.rank }}
+            </b-card-text>
+          </b-card>
+        </b-row>
       </b-card-group>
     </div>
   </div>
@@ -62,4 +64,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.card {
+  opacity: 0.7;
+}
+</style>

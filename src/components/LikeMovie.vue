@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="likeMovie">♥</button>
+    <b-icon icon="suit-heart-fill" variant="danger" @click="likeMovie"></b-icon>
   </div>
 </template>
 

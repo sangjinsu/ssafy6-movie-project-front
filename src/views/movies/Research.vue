@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container>
     <!-- 
     <div>
       <b-dropdown  id="dropdown-1" text="Dropdown Button" class="m-md-2">
@@ -31,20 +31,22 @@
     </div>
     -->
     <v-select v-model="selected" :options="options"></v-select>
-    <div v-for="movie in movies" :key="movie.id">
-      <img
-        :src="`https://image.tmdb.org/t/p/w200/${movie.poster_path}`"
-        alt="poster"
-      />
+    <div v-for="(movieList, index) in movieLists" :key="index">
+      <movie-image-list :movieList="movieList"></movie-image-list>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import axios from "axios";
+import _ from 'lodash'
+import MovieImageList from "@/components/MovieImageList.vue";
 
 export default {
   name: "Research",
+  components: {
+    MovieImageList
+  },
   data: function () {
     return {
       movies: this.$store.getters['getTopMoviesList'],
@@ -70,6 +72,11 @@ export default {
         {label: '서부', id:37},
       ]
     };
+  },
+  computed: {
+    movieLists(){
+      return _.chunk(this.movies, 15)
+    }
   },
   watch: {
     selected(){

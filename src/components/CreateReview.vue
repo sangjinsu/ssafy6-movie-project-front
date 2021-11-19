@@ -7,7 +7,11 @@
             <label>제목:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input v-model="forms.title" type="text"></b-form-input>
+            <b-form-input
+              v-model="forms.title"
+              type="text"
+              size="sm"
+            ></b-form-input>
           </b-col>
         </b-row>
         <b-row class="my-1">
@@ -15,7 +19,11 @@
             <label>내용:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input v-model="forms.content" type="text"></b-form-input>
+            <b-form-input
+              v-model="forms.content"
+              type="text"
+              size="sm"
+            ></b-form-input>
           </b-col>
         </b-row>
         <b-row class="my-1">
@@ -27,7 +35,9 @@
           </b-col>
         </b-row>
         <b-button type="submit" variant="primary">등록</b-button>
-        <b-button type="submit" variant="danger">취소</b-button>
+        <b-button type="submit" variant="danger" @click.prevent="onCancel"
+          >취소</b-button
+        >
       </b-form>
     </b-container>
   </div>
@@ -56,6 +66,9 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      if (!this.forms.title || !this.forms.content || !this.forms.rank) {
+        return;
+      }
       this.$emit("toggle");
       axios({
         method: "post",
@@ -74,6 +87,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    onCancel() {
+      // console.log("cancel");
+      this.show = false;
+      this.$emit("toggle");
     },
   },
 };

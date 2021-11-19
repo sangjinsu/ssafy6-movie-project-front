@@ -26,7 +26,7 @@ export default new Vuex.Store({
     },
     getLastestMovies(state) {
       if (state.lastestMovies) {
-        return state.lastestMovies.slice(0, 20)
+        return state.lastestMovies.slice(0, 30)
       }
       return state.lastestMovies
     },

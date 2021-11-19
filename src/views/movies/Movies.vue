@@ -5,7 +5,7 @@
       <movie-image-list :movieList="pickMovies"></movie-image-list>
       
       <h1>최신 영화</h1>
-      <movie-image-list :movieList="getLastestMovies"></movie-image-list>
+      <movie-image-list v-for="(lastestMovieList, index) in lastestMovieLists" :key="index" :movieList="lastestMovieList"></movie-image-list>
 
       <h1>좋아요한 영화</h1>
       <movie-image-list :movieList="likeMovies"></movie-image-list>
@@ -18,6 +18,7 @@ import axios from "axios";
 import MovieImageList from "@/components/MovieImageList.vue";
 import TopMovieImageList from "@/components/TopMovieImageList.vue";
 import { mapGetters } from "vuex";
+import _ from 'lodash'
 
 export default {
   name: "Movies",
@@ -32,6 +33,9 @@ export default {
   },
   computed: {
     ...mapGetters(["getLastestMovies", 'getTopMovies']),
+    lastestMovieLists() {
+      return _.chunk(this.getLastestMovies, 15)
+    }
   },
   created() {
     this.$store.dispatch("getTopMovies")

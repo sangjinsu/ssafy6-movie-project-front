@@ -2,16 +2,28 @@
   <div>
     <b-container fluid>
       <b-form @submit="onSubmit" v-if="show">
-        <b-row class="my-1" v-for="type in types" :key="type.id">
+        <b-row class="my-1">
           <b-col sm="3">
-            <label :for="`type-${type.name}`">{{ type.title }}:</label>
+            <label>제목:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input
-              :id="`type-${type.name}`"
-              :type="type.name"
-              v-model="forms.content"
-            ></b-form-input>
+            <b-form-input v-model="forms.title" type="text"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-1">
+          <b-col sm="3">
+            <label>내용:</label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input v-model="forms.content" type="text"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-1">
+          <b-col sm="3">
+            <label>점수:</label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input v-model="forms.rank" type="number"></b-form-input>
           </b-col>
         </b-row>
         <b-button type="submit" variant="primary">등록</b-button>
@@ -22,6 +34,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CreateReview",
   data() {
@@ -29,12 +43,12 @@ export default {
       forms: {
         title: null,
         content: null,
-        rate: null,
+        rank: null,
       },
       types: [
-        { name: "text", title: "제목" },
-        { name: "text", title: "내용" },
-        { name: "number", title: "점수" },
+        { name: "text", title: "제목", value: this.title },
+        { name: "text", title: "내용", value: this.content },
+        { name: "number", title: "점수", value: this.rank },
       ],
       show: true,
     };
@@ -42,7 +56,24 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$emit("submit-review", this.forms);
+      this.$emit("toggle");
+      axios({
+        method: "post",
+        url: `http://127.0.0.1:8000/community/${this.$route.params.movie_id}/reviews/`,
+        headers: this.$store.getters["setToken"],
+        data: {
+          title: this.forms.title,
+          content: this.forms.content,
+          rank: this.forms.rank,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          this.show = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

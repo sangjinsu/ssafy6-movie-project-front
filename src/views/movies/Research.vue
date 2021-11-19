@@ -47,7 +47,7 @@ export default {
   name: "Research",
   data: function () {
     return {
-      movies: this.$store.getters['getLastestMovies'],
+      movies: this.$store.getters['getTopMoviesList'],
       selected: '장르',
       options: [
         {label: '액션', id: 28},

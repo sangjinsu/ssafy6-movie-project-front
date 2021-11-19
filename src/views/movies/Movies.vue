@@ -1,9 +1,15 @@
 <template>
   <b-container>
-      <top-movie-image-list :movieList="topMovies"></top-movie-image-list>
-      <movie-image-list :movieList="getLastestMovies"></movie-image-list>
-      <movie-image-list :movieList="likeMovies"></movie-image-list>
+      <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
+      <h1>찜한 영화</h1>
       <movie-image-list :movieList="pickMovies"></movie-image-list>
+      
+      <h1>최신 영화</h1>
+      <movie-image-list :movieList="getLastestMovies"></movie-image-list>
+
+      <h1>좋아요한 영화</h1>
+      <movie-image-list :movieList="likeMovies"></movie-image-list>
+      
   </b-container>
 </template>
 
@@ -20,28 +26,15 @@ export default {
   },
   data() {
     return {
-      topMovies: null,
       likeMovies: null,
       pickMovies: null,
     };
   },
   computed: {
-    ...mapGetters(["getLastestMovies"]),
+    ...mapGetters(["getLastestMovies", 'getTopMovies']),
   },
   created() {
-    this.$store.dispatch("getLastestMovies");
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/movies/top",
-      headers: this.$store.getters["setToken"],
-    })
-      .then((res) => {
-        this.topMovies = res.data;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
+    this.$store.dispatch("getTopMovies")
     this.$store.dispatch("getLastestMovies");
 
     axios({

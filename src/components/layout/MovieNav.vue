@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "Header",
+  name: "MovieNav",
   methods: {
     logout: function () {
       this.$store.dispatch("logout");

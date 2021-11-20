@@ -32,7 +32,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLastestMovies", 'getTopMovies']),
+    ...mapGetters(["getLastestMovies", 'getTopMovies', 'getProfile']),
     lastestMovieLists() {
       return _.chunk(this.getLastestMovies, 15)
     }
@@ -40,6 +40,7 @@ export default {
   created() {
     this.$store.dispatch("getTopMovies")
     this.$store.dispatch("getLastestMovies");
+    this.$store.dispatch("getProfile")
 
     axios({
       method: "get",

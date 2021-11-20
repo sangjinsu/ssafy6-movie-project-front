@@ -36,8 +36,8 @@ export default {
           data: commentItem,
           headers: this.$store.getters["setToken"],
         })
-          .then((res) => {
-            console.log(res.data);
+          .then(() => {
+            this.$emit('create-comment')
             this.content = "";
           })
           .catch((err) => {

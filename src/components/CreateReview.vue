@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid>
-      <b-form @submit="onSubmit" v-if="show">
+      <b-form @submit="onSubmit" >
         <b-row class="my-1">
           <b-col sm="3">
             <label>제목:</label>
@@ -60,7 +60,6 @@ export default {
         { name: "text", title: "내용", value: this.content },
         { name: "number", title: "점수", value: this.rank },
       ],
-      show: true,
     };
   },
   methods: {
@@ -69,7 +68,7 @@ export default {
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;
       }
-      this.$emit("toggle");
+     
       axios({
         method: "post",
         url: `http://127.0.0.1:8000/community/${this.$route.params.movie_id}/reviews/`,
@@ -82,15 +81,13 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.show = false;
+           this.$emit("toggle");
         })
         .catch((err) => {
           console.log(err);
         });
     },
     onCancel() {
-      // console.log("cancel");
-      this.show = false;
       this.$emit("toggle");
     },
   },

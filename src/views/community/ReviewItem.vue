@@ -9,7 +9,7 @@
       <b-icon icon="pencil-square" @click="updateReviewItem(movie.id)"></b-icon>
       <button @click="deleteReviewItem">X</button>
     </p>
-    <create-comment :reviewNum="this.reviewNum"></create-comment>
+    <create-comment :reviewNum="this.reviewNum" @create-comment="fetchComments"></create-comment>
     <comment-list :reviewNum="this.reviewNum"></comment-list>
   </div>
 </template>
@@ -27,8 +27,9 @@ export default {
   },
   data: function () {
     return {
-      reviewItem: [],
+      reviewItem: null,
       reviewNum: `${this.$route.params.review_id}`,
+      comments : null
     };
   },
   methods: {
@@ -67,19 +68,20 @@ export default {
           console.log(err);
         });
     },
+    fetchComments(){
+ 
+      }
   },
   created() {
-    axios({
-      method: "get",
-      url: `http://127.0.0.1:8000/community/reviews/${this.reviewNum}`,
-      headers: this.$store.getters["setToken"],
-    })
-      .then((res) => {
-        // console.log(this.$route.params.review_id);
-        this.reviewItem = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
+      axios({
+        method: "get",
+        url: `http://127.0.0.1:8000/community/reviews/${this.reviewNum}`,
+        headers: this.$store.getters["setToken"],
+      }).then((res) => {
+          // console.log(this.$route.params.review_id);
+          this.reviewItem = res.data;
+      }).catch((err) => {
+          console.log(err);
       });
   },
 };

@@ -10,7 +10,8 @@
       <button @click="deleteReviewItem">X</button>
     </p>
     <create-comment :reviewNum="this.reviewNum" @create-comment="fetchComments"></create-comment>
-    <comment-list :reviewNum="this.reviewNum"></comment-list>
+    <comment-list :reviewNum="this.reviewNum" :commentList="this.comments">
+    </comment-list>
   </div>
 </template>
 
@@ -29,7 +30,7 @@ export default {
     return {
       reviewItem: null,
       reviewNum: `${this.$route.params.review_id}`,
-      comments : null
+      comments : []
     };
   },
   methods: {
@@ -69,10 +70,23 @@ export default {
         });
     },
     fetchComments(){
- 
+        // console.log(this.$store.getters["setToken"])
+        axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/community/${this.reviewNum}/comments/`,
+          headers: this.$store.getters["setToken"], 
+        })
+          .then(res => {
+            console.log(res)
+            this.comments = res.data
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }
   },
   created() {
+    this.fetchComments()
       axios({
         method: "get",
         url: `http://127.0.0.1:8000/community/reviews/${this.reviewNum}`,

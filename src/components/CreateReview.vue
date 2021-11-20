@@ -82,6 +82,7 @@ export default {
         .then((res) => {
           console.log(res);
            this.$emit("toggle");
+           this.$emit('create-review')
         })
         .catch((err) => {
           console.log(err);

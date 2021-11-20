@@ -1,7 +1,8 @@
 <template>
   <div>
-    <p v-for="comment in Comments" :key="comment.pk">
+    <p v-for="comment in commentList" :key="comment.pk">
       {{ comment.content }}
+      {{ comment.user }}
       {{ comment.created_at }}
       {{ comment.updated_at }}
       <button @click="deleteComment(comment.pk)">x</button>
@@ -14,13 +15,10 @@ import axios from "axios";
 
 export default {
   name: "CommentList",
-  data: function () {
-    return {
-      Comments: [],
-    };
-  },
+  
   props: {
     reviewNum: null,
+    commentList: []
   },
   methods: {
     deleteComment(pk) {
@@ -48,7 +46,7 @@ export default {
     })
       .then((res) => {
         console.log(res.data);
-        this.Comments = res.data;
+        // this.Comments = res.data;
       })
       .catch((err) => {
         console.log(err);

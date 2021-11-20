@@ -12,7 +12,7 @@
             header="Dark"
             text-variant="white"
             class="text-center"
-            v-for="review in Reviews"
+            v-for="review in reviews"
             :key="review.pk"
             @click="pushReviewItem(review.pk)"
           >
@@ -38,6 +38,9 @@ export default {
       Reviews: [],
     };
   },
+  props: {
+    reviews: [],
+  },
   methods: {
     createReview() {
       this.$emit("create-review");
@@ -57,7 +60,7 @@ export default {
     })
       .then((res) => {
         console.log(res.data);
-        this.Reviews = res.data;
+        // this.Reviews = res.data;
       })
       .catch((err) => console.log(err));
   },

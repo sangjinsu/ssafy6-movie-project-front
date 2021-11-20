@@ -6,6 +6,7 @@
       {{ reviewItem.rank }}
       {{ reviewItem.created_at }}
       {{ reviewItem.updated_at }}
+      <b-icon icon="pencil-square" @click="updateReviewItem(movie.id)"></b-icon>
       <button @click="deleteReviewItem">X</button>
     </p>
     <create-comment :reviewNum="this.reviewNum"></create-comment>
@@ -39,6 +40,28 @@ export default {
       })
         .then((res) => {
           console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    updateReviewItem(id) {
+      axios({
+        method: "put",
+        url: `http://127.0.0.1/community/reviews/${this.reviewNum}/`,
+        headers: this.$store.getters["setToken"],
+        data: {
+          title: this.reviewItem.title,
+          content: this.reviewItem.content,
+          rank: this.reviewItem.rank,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          this.$router.push({
+            name: "CreateReview",
+            params: { movie_id: id },
+          });
         })
         .catch((err) => {
           console.log(err);

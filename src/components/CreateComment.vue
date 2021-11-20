@@ -12,6 +12,7 @@
 
 <script>
 import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "CreateComment",
@@ -32,12 +33,12 @@ export default {
       if (commentItem.content) {
         axios({
           method: "post",
-          url: `http://127.0.0.1:8000/community/${this.reviewNum}/comments/`,
+          url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
           data: commentItem,
           headers: this.$store.getters["setToken"],
         })
           .then(() => {
-            this.$emit('create-comment')
+            this.$emit("create-comment");
             this.content = "";
           })
           .catch((err) => {

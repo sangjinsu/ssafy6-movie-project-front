@@ -1,15 +1,18 @@
 <template>
   <b-container>
-      <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
-      <h1>찜한 영화</h1>
-      <movie-image-list :movieList="pickMovies"></movie-image-list>
-      
-      <h1>최신 영화</h1>
-      <movie-image-list v-for="(lastestMovieList, index) in lastestMovieLists" :key="index" :movieList="lastestMovieList"></movie-image-list>
+    <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
+    <h1>찜한 영화</h1>
+    <movie-image-list :movieList="pickMovies"></movie-image-list>
 
-      <h1>좋아요한 영화</h1>
-      <movie-image-list :movieList="likeMovies"></movie-image-list>
-      
+    <h1>최신 영화</h1>
+    <movie-image-list
+      v-for="(lastestMovieList, index) in lastestMovieLists"
+      :key="index"
+      :movieList="lastestMovieList"
+    ></movie-image-list>
+
+    <h1>좋아요한 영화</h1>
+    <movie-image-list :movieList="likeMovies"></movie-image-list>
   </b-container>
 </template>
 
@@ -18,12 +21,14 @@ import axios from "axios";
 import MovieImageList from "@/components/MovieImageList.vue";
 import TopMovieImageList from "@/components/TopMovieImageList.vue";
 import { mapGetters } from "vuex";
-import _ from 'lodash'
+import _ from "lodash";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Movies",
   components: {
-   MovieImageList, TopMovieImageList
+    MovieImageList,
+    TopMovieImageList,
   },
   data() {
     return {
@@ -32,19 +37,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLastestMovies", 'getTopMovies', 'getProfile']),
+    ...mapGetters(["getLastestMovies", "getTopMovies", "getProfile"]),
     lastestMovieLists() {
-      return _.chunk(this.getLastestMovies, 15)
-    }
+      return _.chunk(this.getLastestMovies, 15);
+    },
   },
   created() {
-    this.$store.dispatch("getTopMovies")
+    this.$store.dispatch("getTopMovies");
     this.$store.dispatch("getLastestMovies");
-    this.$store.dispatch("getProfile")
+    this.$store.dispatch("getProfile");
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:8000/movies/like",
+      url: `${SERVER_URL}/movies/like`,
       headers: this.$store.getters["setToken"],
     })
       .then((res) => {
@@ -56,7 +61,7 @@ export default {
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:8000/movies/pick",
+      url: `${SERVER_URL}/movies/pick`,
       headers: this.$store.getters["setToken"],
     })
       .then((res) => {

@@ -1,21 +1,21 @@
 <template>
-    <swiper-slide >
+  <swiper-slide>
     <img
       id="img"
       :src="posterPath"
       class="rounded mx-auto d-block"
       @click="pushMovieItem"
     />
-    </swiper-slide>
+  </swiper-slide>
 </template>
 
-
 <script>
-import { SwiperSlide } from 'vue-awesome-swiper'
+import { SwiperSlide } from "vue-awesome-swiper";
+
 export default {
   name: "MovieImage",
   components: {
-    SwiperSlide 
+    SwiperSlide,
   },
   props: {
     movie: {
@@ -38,5 +38,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

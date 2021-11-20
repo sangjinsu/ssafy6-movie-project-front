@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid>
-      <b-form @submit="onSubmit" >
+      <b-form @submit="onSubmit">
         <b-row class="my-1">
           <b-col sm="3">
             <label>제목:</label>
@@ -45,6 +45,7 @@
 
 <script>
 import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "CreateReview",
@@ -68,10 +69,10 @@ export default {
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;
       }
-     
+
       axios({
         method: "post",
-        url: `http://127.0.0.1:8000/community/${this.$route.params.movie_id}/reviews/`,
+        url: `${SERVER_URL}/community/${this.$route.params.movie_id}/reviews/`,
         headers: this.$store.getters["setToken"],
         data: {
           title: this.forms.title,
@@ -81,8 +82,8 @@ export default {
       })
         .then((res) => {
           console.log(res);
-           this.$emit("toggle");
-           this.$emit('create-review')
+          this.$emit("toggle");
+          this.$emit("create-review");
         })
         .catch((err) => {
           console.log(err);

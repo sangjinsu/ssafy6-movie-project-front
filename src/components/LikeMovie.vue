@@ -6,6 +6,7 @@
 
 <script>
 import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "LikeMovie",
@@ -17,7 +18,7 @@ export default {
       console.log(this.movieId);
       axios({
         method: "post",
-        url: "http://127.0.0.1:8000/movies/like/",
+        url: `${SERVER_URL}/movies/like/`,
         headers: this.$store.getters["setToken"],
       })
         .then((res) => {

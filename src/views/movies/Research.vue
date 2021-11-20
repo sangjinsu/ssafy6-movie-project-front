@@ -39,55 +39,56 @@
 
 <script>
 import axios from "axios";
-import _ from 'lodash'
+import _ from "lodash";
 import MovieImageList from "@/components/MovieImageList.vue";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Research",
   components: {
-    MovieImageList
+    MovieImageList,
   },
   data: function () {
     return {
-      movies: this.$store.getters['getTopMoviesList'],
-      selected: '장르',
+      movies: this.$store.getters["getTopMoviesList"],
+      selected: "장르",
       options: [
-        {label: '액션', id: 28},
-        {label: '모험', id:12},
-        {label: '애니메이션', id:16},
-        {label: '범죄', id:80},
-        {label: '다큐멘터리', id:99},
-        {label: '드라마', id:18},
-        {label: '가족', id:10751},
-        {label: '판타지', id:14},
-        {label: '역사', id:36},
-        {label: '공포', id:27},
-        {label: '음악', id:10402},
-        {label: '미스터리', id:9648},
-        {label: '로맨스', id:10749},
-        {label: 'SF', id:878},
-        {label: 'TV 영화', id:10770},
-        {label: '스릴러', id:53},
-        {label: '전쟁', id:10752},
-        {label: '서부', id:37},
-      ]
+        { label: "액션", id: 28 },
+        { label: "모험", id: 12 },
+        { label: "애니메이션", id: 16 },
+        { label: "범죄", id: 80 },
+        { label: "다큐멘터리", id: 99 },
+        { label: "드라마", id: 18 },
+        { label: "가족", id: 10751 },
+        { label: "판타지", id: 14 },
+        { label: "역사", id: 36 },
+        { label: "공포", id: 27 },
+        { label: "음악", id: 10402 },
+        { label: "미스터리", id: 9648 },
+        { label: "로맨스", id: 10749 },
+        { label: "SF", id: 878 },
+        { label: "TV 영화", id: 10770 },
+        { label: "스릴러", id: 53 },
+        { label: "전쟁", id: 10752 },
+        { label: "서부", id: 37 },
+      ],
     };
   },
   computed: {
-    movieLists(){
-      return _.chunk(this.movies, 15)
-    }
+    movieLists() {
+      return _.chunk(this.movies, 15);
+    },
   },
   watch: {
-    selected(){
-      this.research(this.selected.id)
-    }
+    selected() {
+      this.research(this.selected.id);
+    },
   },
   methods: {
     research: function (genres) {
       axios({
         method: "get",
-        url: `http://127.0.0.1:8000/movies/${genres}/genres/`,
+        url: `${SERVER_URL}/movies/${genres}/genres/`,
         headers: this.$store.getters["setToken"],
       })
         .then((res) => {
@@ -101,5 +102,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

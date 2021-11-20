@@ -68,6 +68,7 @@
 
 <script>
 import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Signup",
@@ -95,7 +96,7 @@ export default {
     signup: function () {
       axios({
         method: "post",
-        url: "http://127.0.0.1:8000/accounts/signup/",
+        url: `${SERVER_URL}/accounts/signup/`,
         data: this.credentials,
       })
         .then(() => {

@@ -10,7 +10,12 @@
     </div>
     <div>
       <label for="password">password: </label>
-      <input type="password" @keyup.enter="login" id="password" v-model="credentials.password" />
+      <input
+        type="password"
+        @keyup.enter="login"
+        id="password"
+        v-model="credentials.password"
+      />
       <button @click="login">login</button>
     </div>
   </div>
@@ -18,6 +23,7 @@
 
 <script>
 import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Login",
@@ -33,12 +39,12 @@ export default {
     login: function () {
       axios({
         method: "post",
-        url: "http://127.0.0.1:8000/accounts/api-token-auth/",
+        url: `${SERVER_URL}/accounts/api-token-auth/`,
         data: this.credentials,
       })
         .then((res) => {
           console.log(res);
-          this.$store.dispatch('login', res.data.token)
+          this.$store.dispatch("login", res.data.token);
           this.$router.push({ name: "Movies" });
         })
         .catch((err) => {

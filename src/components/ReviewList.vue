@@ -29,17 +29,12 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "ReviewList",
-  data: function () {
-    return {
-      Reviews: [],
-    };
-  },
+  
   props: {
-    reviews: [],
+    reviews: Array,
   },
   methods: {
     createReview() {
@@ -51,20 +46,8 @@ export default {
         params: { review_id: pk },
       });
     },
-  },
-  created() {
-    axios({
-      method: "get",
-      url: `http://127.0.0.1:8000/community/${this.$route.params.movie_id}/reviews/`,
-      headers: this.$store.getters["setToken"],
-    })
-      .then((res) => {
-        console.log(res.data);
-        // this.Reviews = res.data;
-      })
-      .catch((err) => console.log(err));
-  },
-};
+  }
+}
 </script>
 
 <style>

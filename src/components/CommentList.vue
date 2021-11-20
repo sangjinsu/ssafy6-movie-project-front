@@ -15,7 +15,11 @@ import axios from "axios";
 
 export default {
   name: "CommentList",
-  
+  data: function () {
+    return {
+      commentId: null
+    }
+  },
   props: {
     reviewNum: null,
     commentList: []
@@ -31,6 +35,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
+          this.$emit('delete-comment')
         })
         .catch((err) => {
           console.log(err);
@@ -38,7 +43,7 @@ export default {
     },
   },
   created() {
-    console.log(`${this.reviewNum}`);
+    // console.log(`${this.reviewNum}`);
     axios({
       method: "get",
       url: `http://127.0.0.1:8000/community/${this.reviewNum}/comments/`,
@@ -46,7 +51,7 @@ export default {
     })
       .then((res) => {
         console.log(res.data);
-        // this.Comments = res.data;
+        
       })
       .catch((err) => {
         console.log(err);

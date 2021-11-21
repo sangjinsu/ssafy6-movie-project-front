@@ -7,7 +7,6 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -19,7 +18,7 @@ export default {
   },
   props: {
     movieId: String,
-    userList: Array,
+    hasUser: Boolean,
   },
   methods: {
     likeMovie() {
@@ -30,22 +29,18 @@ export default {
           movieId: parseInt(this.movieId)
         }
       })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
+          if (this.hasUser) {
+            this.$emit('delete-like')
+          } else {
+            this.$emit('add-like')
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     },
   },
-  
-  computed: {
-    ...mapGetters(['getUser']),
-    hasUser() {
-      console.log(this.getUser)
-      return this.userList.includes(this.getUser.pk)
-    }
-  }
 };
 </script>
 

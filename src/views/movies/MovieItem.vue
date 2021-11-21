@@ -1,7 +1,12 @@
 <template>
   <div>
     {{ movieItem }}
-    <like-movie :movieId="this.movieId" :userList="likeUserList"></like-movie>
+    <like-movie 
+      :movieId="movieId" 
+      :hasUser="hasUser"
+      @add-like="addLike"
+      @delete-like="deleteLike"
+    ></like-movie>
     <pick-movie></pick-movie>
     <span>Review</span>
     <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
@@ -20,6 +25,7 @@ import ReviewList from "@/components/ReviewList.vue";
 import CreateReview from "@/components/CreateReview.vue";
 import LikeMovie from "@/components/LikeMovie.vue";
 import PickMovie from "@/components/PickMovie.vue";
+import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -36,7 +42,7 @@ export default {
       movieId: `${this.$route.params.movie_id}`,
       reviews: [],
       show: true,
-      likeUserList: []
+      likeUserList: [],
     };
   },
   methods: {
@@ -56,6 +62,13 @@ export default {
     },
     changeForm() {
       this.show = !this.show
+    },
+    addLike(){
+      console.log(this.getUserPK)
+      this.likeUserList.push(this.getUserPK)
+    },
+    deleteLike(){
+      this.likeUserList.splice(this.likeUserList.indexOf(this.getUserPK), 1)
     }
   },
   created() {
@@ -71,6 +84,12 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  },
+  computed: {
+    ...mapGetters(['getUserPK']),
+    hasUser(){
+      return this.likeUserList.includes(this.getUserPK)
+    }
   },
 };
 </script>

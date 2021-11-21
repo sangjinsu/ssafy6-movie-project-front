@@ -1,7 +1,6 @@
 <template>
   <div>
     {{ movieItem }}
-    <video-item></video-item>
     <like-movie
       :movieId="movieId"
       :hasUser="hasUser"
@@ -28,7 +27,6 @@
 <script>
 import axios from "axios";
 import ReviewList from "@/components/ReviewList.vue";
-import VideoItem from "@/components/VideoItem.vue";
 import CreateReview from "@/components/CreateReview.vue";
 import LikeMovie from "@/components/LikeMovie.vue";
 import PickMovie from "@/components/PickMovie.vue";
@@ -42,7 +40,6 @@ export default {
     CreateReview,
     LikeMovie,
     PickMovie,
-    VideoItem,
   },
   data: function () {
     return {
@@ -61,7 +58,6 @@ export default {
         url: `${SERVER_URL}/community/${this.movieId}/reviews/`,
       })
         .then((res) => {
-          console.log(res);
           this.reviews = res.data;
           this.show = true;
         })
@@ -73,14 +69,12 @@ export default {
       this.show = !this.show;
     },
     addLike() {
-      console.log(this.getUserPK);
       this.likeUserList.push(this.getUserPK);
     },
     deleteLike() {
       this.likeUserList.splice(this.likeUserList.indexOf(this.getUserPK), 1);
     },
     addPick() {
-      console.log(this.getUserPK);
       this.pickUserList.push(this.getUserPK);
     },
     deletePick() {

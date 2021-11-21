@@ -1,13 +1,15 @@
 <template>
   <div>
     {{ movieItem }}
-    <like-movie :movieId="this.movieId"></like-movie>
+    <like-movie :movieId="this.movieId" :userList="likeUserList"></like-movie>
     <pick-movie></pick-movie>
     <span>Review</span>
+    <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
+    </review-list>
     <create-review
-      @create-review="fetchReview"
+      @create-review="fetchReview" v-else @change-form="changeForm"
     ></create-review>
-    <review-list :reviews="this.reviews"></review-list>
+    
   </div>
 </template>
 
@@ -24,7 +26,6 @@ export default {
   name: "MovieItem",
   components: {
     ReviewList,
-
     CreateReview,
     LikeMovie,
     PickMovie,
@@ -34,6 +35,8 @@ export default {
       movieItem: null,
       movieId: `${this.$route.params.movie_id}`,
       reviews: [],
+      show: true,
+      likeUserList: []
     };
   },
   methods: {
@@ -45,11 +48,15 @@ export default {
         .then((res) => {
           console.log(res);
           this.reviews = res.data;
+          this.show= true
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    changeForm() {
+      this.show = !this.show
+    }
   },
   created() {
     this.fetchReview();
@@ -59,6 +66,7 @@ export default {
     })
       .then((res) => {
         this.movieItem = res.data;
+        this.likeUserList = this.movieItem.like_users
       })
       .catch((err) => {
         console.log(err);

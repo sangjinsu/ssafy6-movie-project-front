@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span><button @click="changeForm">review작성</button></span>
     <div>
       <b-card-group deck>
         <b-row>
@@ -36,6 +37,9 @@ export default {
   methods: {
     createReview() {
       this.$emit("create-review");
+    },
+    changeForm() {
+      this.$emit('change-form')
     },
     pushReviewItem(pk) {
       this.$router.push({

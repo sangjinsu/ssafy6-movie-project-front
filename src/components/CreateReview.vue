@@ -88,7 +88,7 @@ export default {
         });
     },
     onCancel() {
-
+      this.$emit("change-form")
     },
   },
 };

@@ -11,6 +11,7 @@
 import axios from "axios";
 import _ from "lodash";
 import MovieImageList from "@/components/MovieImageList.vue";
+import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -20,7 +21,7 @@ export default {
   },
   data: function () {
     return {
-      movies: this.$store.getters["getTopMoviesList"],
+      genreMovies: null,
       selected: "장르",
       options: [
         { label: "액션", id: 28 },
@@ -44,7 +45,19 @@ export default {
       ],
     };
   },
+  created(){
+    if (this.getTopMoviesList === null){
+      this.$store.dispatch('getTopMovies')
+    }
+  },
   computed: {
+    ...mapGetters(["getTopMoviesList"]),
+    movies(){
+      if (this.genreMovies === null){
+        return this.getTopMoviesList
+      }
+      return this.genreMovies
+    },
     movieLists() {
       return _.chunk(this.movies, 15);
     },
@@ -55,13 +68,13 @@ export default {
     },
   },
   methods: {
-    research: function (genres) {
+    research(genres) {
       axios({
         method: "get",
         url: `${SERVER_URL}/movies/${genres}/genres/`,
       })
         .then((res) => {
-          this.movies = res.data;
+          this.genreMovies = res.data;
         })
         .catch((err) => {
           console.log(err);

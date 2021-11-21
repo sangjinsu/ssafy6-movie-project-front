@@ -63,7 +63,6 @@ export default new Vuex.Store({
       commit('LOGIN', token)
     },
     getLastestMovies({ commit }) {
-      console.log(this.state.token)
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies',
@@ -91,6 +90,8 @@ export default new Vuex.Store({
       const token = localStorage.getItem('jwt')
       if (token) {
         commit('LOGIN', token)
+      } else {
+        commit('LOGOUT')
       }
     },
   },

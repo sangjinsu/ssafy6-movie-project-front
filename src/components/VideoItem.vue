@@ -34,7 +34,6 @@ export default {
     axios({
       method: "post",
       url: `${SERVER_URL}/movies/youtube/`,
-      headers: this.$store.getters["setToken"],
       data: { title: this.title },
     })
       .then((res) => {

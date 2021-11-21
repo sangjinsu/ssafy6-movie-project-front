@@ -35,7 +35,6 @@ export default {
           method: "post",
           url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
           data: commentItem,
-          headers: this.$store.getters["setToken"],
         })
           .then(() => {
             this.$emit("create-comment");

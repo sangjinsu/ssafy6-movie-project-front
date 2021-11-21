@@ -14,11 +14,8 @@ export default {
   components: {
     MovieNav,
   },
-  created() {
-    
-  },
   computed: {
-    ...mapGetters(["isLogin", "getToken"]),
+    ...mapGetters(["isLogin"]),
   },
 };
 </script>

@@ -73,7 +73,6 @@ export default {
       axios({
         method: "post",
         url: `${SERVER_URL}/community/${this.$route.params.movie_id}/reviews/`,
-        headers: this.$store.getters["setToken"],
         data: {
           title: this.forms.title,
           content: this.forms.content,

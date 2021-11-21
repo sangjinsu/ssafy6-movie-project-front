@@ -19,7 +19,6 @@ export default {
       axios({
         method: "post",
         url: `${SERVER_URL}/movies/like/`,
-        headers: this.$store.getters["setToken"],
       })
         .then((res) => {
           console.log(res.data);

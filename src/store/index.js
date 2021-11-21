@@ -4,30 +4,16 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const setToken = (token) => {
-  return {
-    Authorization: `JWT ${token}`,
-  }
-}
-
 export default new Vuex.Store({
   state: {
-    isLogin: !!localStorage.getItem('jwt'),
-    token: localStorage.getItem('jwt'),
+    token: null,
     lastestMovies: null,
     topMovies: null,
     profile: null,
   },
   getters: {
-    getToken(state) {
-      return state.token
-    },
     isLogin(state) {
-      return state.isLogin
-    },
-    setToken(state) {
-      const config = setToken(state.token)
-      return config
+      return !!state.token
     },
     getLastestMovies(state) {
       if (state.lastestMovies) {
@@ -51,12 +37,12 @@ export default new Vuex.Store({
   mutations: {
     LOGOUT(state) {
       state.token = null
-      state.isLogin = false
       localStorage.removeItem('jwt')
     },
     LOGIN(state, token) {
       state.token = token
-      state.isLogin = true
+      // 모든 HTTP 요청 헤더에 Authorization 을 추가한다.
+      axios.defaults.headers.common['Authorization'] = `JWT ${token}`
       localStorage.setItem('jwt', token)
     },
     GET_LASTEST_MOVIES(state, lastestMovies) {
@@ -77,10 +63,10 @@ export default new Vuex.Store({
       commit('LOGIN', token)
     },
     getLastestMovies({ commit }) {
+      console.log(this.state.token)
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies',
-        headers: setToken(this.state.token),
       })
         .then((res) => commit('GET_LASTEST_MOVIES', res.data))
         .catch((err) => console.error(err))
@@ -89,7 +75,6 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies/top',
-        headers: setToken(this.state.token),
       })
         .then((res) => commit('GET_TOP_MOVIES', res.data))
         .catch((err) => console.error(err))
@@ -98,10 +83,15 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/accounts/profile',
-        headers: setToken(this.state.token),
       })
         .then((res) => commit('GET_PROFILE', res.data))
         .catch((err) => console.error(err))
+    },
+    checkLogin({ commit }) {
+      const token = localStorage.getItem('jwt')
+      if (token) {
+        commit('LOGIN', token)
+      }
     },
   },
   modules: {},

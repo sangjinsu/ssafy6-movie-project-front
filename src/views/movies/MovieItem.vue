@@ -44,7 +44,6 @@ export default {
       axios({
         method: "get",
         url: `${SERVER_URL}/community/${this.movieId}/reviews/`,
-        headers: this.$store.getters["setToken"],
       })
         .then((res) => {
           console.log(res);
@@ -60,7 +59,6 @@ export default {
     axios({
       method: "get",
       url: `${SERVER_URL}/movies/${this.$route.params.movie_id}`,
-      headers: this.$store.getters["setToken"],
     })
       .then((res) => {
         this.movieItem = res.data;

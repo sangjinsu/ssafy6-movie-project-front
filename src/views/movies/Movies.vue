@@ -50,7 +50,6 @@ export default {
     axios({
       method: "get",
       url: `${SERVER_URL}/movies/like`,
-      headers: this.$store.getters["setToken"],
     })
       .then((res) => {
         this.likeMovies = res.data;
@@ -62,7 +61,6 @@ export default {
     axios({
       method: "get",
       url: `${SERVER_URL}/movies/pick`,
-      headers: this.$store.getters["setToken"],
     })
       .then((res) => {
         this.pickMovies = res.data;

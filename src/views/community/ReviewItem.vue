@@ -51,7 +51,6 @@ export default {
       axios({
         method: "delete",
         url: `${SERVER_URL}/community/${this.movieId}/reviews/${this.reviewNum}/`,
-        headers: this.$store.getters["setToken"],
       })
         .then((res) => {
           console.log(res);
@@ -71,7 +70,6 @@ export default {
       axios({
         method: "get",
         url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
-        headers: this.$store.getters["setToken"],
       })
         .then((res) => {
           // console.log(res)
@@ -86,7 +84,6 @@ export default {
     axios({
       method: "get",
       url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
-      headers: this.$store.getters["setToken"],
     })
       .then((res) => {
         console.log(res.data);
@@ -99,7 +96,6 @@ export default {
     axios({
       method: "get",
       url: `${SERVER_URL}/community/reviews/${this.reviewNum}`,
-      headers: this.$store.getters["setToken"],
     })
       .then((res) => {
         // console.log(this.$route.params.review_id);

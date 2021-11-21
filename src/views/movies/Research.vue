@@ -20,7 +20,7 @@ export default {
   },
   data: function () {
     return {
-      movies: this.$store.getters["getTopMoviesList"],
+      movies: this.$stosssssre.getters["getTopMoviesList"],
       selected: "장르",
       options: [
         { label: "액션", id: 28 },

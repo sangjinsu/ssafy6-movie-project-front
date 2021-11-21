@@ -5,11 +5,9 @@
     <pick-movie></pick-movie>
     <span>Review</span>
     <create-review
-      v-if="show"
-      @toggle="show = false"
       @create-review="fetchReview"
     ></create-review>
-    <review-list v-else :reviews="this.reviews"></review-list>
+    <review-list :reviews="this.reviews"></review-list>
   </div>
 </template>
 
@@ -35,7 +33,6 @@ export default {
     return {
       movieItem: null,
       movieId: `${this.$route.params.movie_id}`,
-      show: false,
       reviews: [],
     };
   },

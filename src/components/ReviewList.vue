@@ -1,8 +1,5 @@
 <template>
   <div>
-    <p>
-      <button @click="createReview">작성</button>
-    </p>
     <div>
       <b-card-group deck>
         <b-row>

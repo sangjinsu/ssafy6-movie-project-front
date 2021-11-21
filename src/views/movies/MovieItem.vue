@@ -1,6 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
     <!-- {{ movieItem }} -->
     <p>{{ movieItem.title }}</p>
     <p>{{ movieItem.release_date }}</p>
@@ -10,16 +9,6 @@
     
     <like-movie :movieId="this.movieId" :userList="likeUserList"></like-movie>
     <pick-movie :movieId="this.movieId" :userList="pickUserList"></pick-movie>
-=======
-    {{ movieItem }}
-    <like-movie 
-      :movieId="movieId" 
-      :hasUser="hasUser"
-      @add-like="addLike"
-      @delete-like="deleteLike"
-    ></like-movie>
-    <pick-movie></pick-movie>
->>>>>>> cbb4acb4268268c9fc4c7f3e528278bd7e572001
     <span>Review</span>
     <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
     </review-list>

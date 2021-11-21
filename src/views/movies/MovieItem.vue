@@ -1,6 +1,7 @@
 <template>
   <div>
     {{ movieItem }}
+    <video-item></video-item>
     <like-movie 
       :movieId="movieId" 
       :hasUser="hasUser"

@@ -9,7 +9,8 @@ export default new Vuex.Store({
     token: null,
     lastestMovies: null,
     topMovies: null,
-    user: null,
+    userPK: null,
+    userName: null,
   },
   getters: {
     isLogin(state) {
@@ -30,14 +31,15 @@ export default new Vuex.Store({
     getTopMoviesList(state) {
       return state.topMovies
     },
-    getUser(state) {
-      return state.user
+    getUserPK(state) {
+      return state.userPK
     },
   },
   mutations: {
     LOGOUT(state) {
       state.token = null
-      state.user = null
+      state.userPK = null
+      state.userName = null
       localStorage.removeItem('jwt')
     },
     LOGIN(state, token) {
@@ -53,7 +55,8 @@ export default new Vuex.Store({
       state.topMovies = topMovies
     },
     GET_USER(state, user) {
-      state.user = user
+      state.userPK = user.pk
+      state.userName = user.username
     },
   },
   actions: {
@@ -91,7 +94,7 @@ export default new Vuex.Store({
       const token = localStorage.getItem('jwt')
       if (token) {
         commit('LOGIN', token)
-        if (this.state.user === null) {
+        if (this.state.userPK === null) {
           this.dispatch('getUser')
         }
       } else {

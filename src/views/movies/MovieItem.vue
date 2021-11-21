@@ -1,8 +1,14 @@
 <template>
   <div>
-    {{ movieItem }}
+    <!-- {{ movieItem }} -->
+    <p>{{ movieItem.title }}</p>
+    <p>{{ movieItem.release_date }}</p>
+    <p>
+      <video-item :movieId="this.movieId"></video-item>
+    </p>
+    
     <like-movie :movieId="this.movieId" :userList="likeUserList"></like-movie>
-    <pick-movie></pick-movie>
+    <pick-movie :movieId="this.movieId" :userList="pickUserList"></pick-movie>
     <span>Review</span>
     <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
     </review-list>
@@ -16,7 +22,7 @@
 <script>
 import axios from "axios";
 import ReviewList from "@/components/ReviewList.vue";
-
+import VideoItem from "@/components/VideoItem.vue";
 import CreateReview from "@/components/CreateReview.vue";
 import LikeMovie from "@/components/LikeMovie.vue";
 import PickMovie from "@/components/PickMovie.vue";
@@ -29,6 +35,7 @@ export default {
     CreateReview,
     LikeMovie,
     PickMovie,
+    VideoItem,
   },
   data: function () {
     return {
@@ -67,6 +74,7 @@ export default {
       .then((res) => {
         this.movieItem = res.data;
         this.likeUserList = this.movieItem.like_users
+        this.pickUserList = this.movieItem.pick_users
       })
       .catch((err) => {
         console.log(err);

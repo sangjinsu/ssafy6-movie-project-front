@@ -2,6 +2,7 @@
   <div>
     <b-nav
       small
+      type="dark" variant="dark"
       class="navbar-expand-md bg-dark fw-bold d-flex bd-highlight mb-4"
     >
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
@@ -51,5 +52,12 @@ a.nav-link {
 }
 .navbar-brand {
   margin-left: 16px;
+}
+.dropdown-menu {
+  background-color: #212529  !important;
+  color: white !important
+}
+.dropdown-item {
+  color: white
 }
 </style>

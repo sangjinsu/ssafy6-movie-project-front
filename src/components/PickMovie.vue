@@ -1,20 +1,20 @@
 <template>
   <div>
-    <b-icon icon="plus" @click="pickMovie"></b-icon>
-    <b-icno icon="check2"></b-icno>
+    <b-icon icon="plus" @click="pickMovie" v-if="!pickUser"></b-icon>
+    <b-icon icon="check2" @click="pickMovie" v-else></b-icon>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "PickMovie",
+
   props: {
     movieId: String,
-    userList: Array,
+    pickUser: Boolean,
   },
   methods: {
     pickMovie() {
@@ -22,24 +22,21 @@ export default {
         method: "post",
         url: `${SERVER_URL}/movies/pick/`,
         data: {
-          movieId: parseInt(this.movieId)
-        }
+          movieId: parseInt(this.movieId),
+        },
       })
-        .then(res => {
-          console.log(res.data)
+        .then(() => {
+          if (this.pickUser) {
+            this.$emit("delete-pick");
+          } else {
+            this.$emit("add-pick");
+          }
         })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  computed: {
-    ...mapGetters(['getUser']),
-    hasUser() {
-      console.log(this.getUser)
-      return this.userList.includes(this.getUser.pk)
-    }
-  }
 };
 </script>
 

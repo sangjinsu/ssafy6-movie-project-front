@@ -2,18 +2,25 @@
   <div>
     {{ movieItem }}
     <video-item></video-item>
-    <like-movie 
-      :movieId="movieId" 
+    <like-movie
+      :movieId="movieId"
       :hasUser="hasUser"
       @add-like="addLike"
       @delete-like="deleteLike"
     ></like-movie>
-    <pick-movie></pick-movie>
+    <pick-movie
+      :movieId="movieId"
+      :pickUser="pickUser"
+      @add-pick="addPick"
+      @delete-pick="deletePick"
+    ></pick-movie>
     <span>Review</span>
     <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
     </review-list>
     <create-review
-      @create-review="fetchReview" v-else @change-form="changeForm"
+      @create-review="fetchReview"
+      v-else
+      @change-form="changeForm"
     ></create-review>
   </div>
 </template>
@@ -25,7 +32,7 @@ import VideoItem from "@/components/VideoItem.vue";
 import CreateReview from "@/components/CreateReview.vue";
 import LikeMovie from "@/components/LikeMovie.vue";
 import PickMovie from "@/components/PickMovie.vue";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -44,6 +51,7 @@ export default {
       reviews: [],
       show: true,
       likeUserList: [],
+      pickUserList: [],
     };
   },
   methods: {
@@ -55,22 +63,29 @@ export default {
         .then((res) => {
           console.log(res);
           this.reviews = res.data;
-          this.show= true
+          this.show = true;
         })
         .catch((err) => {
           console.log(err);
         });
     },
     changeForm() {
-      this.show = !this.show
+      this.show = !this.show;
     },
-    addLike(){
-      console.log(this.getUserPK)
-      this.likeUserList.push(this.getUserPK)
+    addLike() {
+      console.log(this.getUserPK);
+      this.likeUserList.push(this.getUserPK);
     },
-    deleteLike(){
-      this.likeUserList.splice(this.likeUserList.indexOf(this.getUserPK), 1)
-    }
+    deleteLike() {
+      this.likeUserList.splice(this.likeUserList.indexOf(this.getUserPK), 1);
+    },
+    addPick() {
+      console.log(this.getUserPK);
+      this.pickUserList.push(this.getUserPK);
+    },
+    deletePick() {
+      this.pickUserList.splice(this.pickUserList.indexOf(this.getUserPK), 1);
+    },
   },
   created() {
     this.fetchReview();
@@ -80,18 +95,21 @@ export default {
     })
       .then((res) => {
         this.movieItem = res.data;
-        this.likeUserList = this.movieItem.like_users
-        this.pickUserList = this.movieItem.pick_users
+        this.likeUserList = this.movieItem.like_users;
+        this.pickUserList = this.movieItem.pick_users;
       })
       .catch((err) => {
         console.log(err);
       });
   },
   computed: {
-    ...mapGetters(['getUserPK']),
-    hasUser(){
-      return this.likeUserList.includes(this.getUserPK)
-    }
+    ...mapGetters(["getUserPK"]),
+    hasUser() {
+      return this.likeUserList.includes(this.getUserPK);
+    },
+    pickUser() {
+      return this.pickUserList.includes(this.getUserPK);
+    },
   },
 };
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p v-for="(comment, index) in commentList" :key="comment.pk">
+    <p v-for="comment in commentList" :key="comment.pk">
       {{ comment.content }}
       {{ comment.user }}
       {{ comment.created_at }}
       {{ comment.updated_at }}
-      <button @click="deleteComment(index)">x</button>
+      <button @click="deleteComment(comment.pk)">x</button>
     </p>
   </div>
 </template>
@@ -26,12 +26,10 @@ export default {
     commentList: [],
   },
   methods: {
-    deleteComment(index) {
-      // console.log(comment, index);
-      this.Comments.splice(index, 1);
+    deleteComment(pk) {
       axios({
         method: "delete",
-        url: `${SERVER_URL}/community/comments/1`,
+        url: `${SERVER_URL}/community/comments/${pk}`,
       })
         .then((res) => {
           console.log(res);
@@ -41,20 +39,7 @@ export default {
           console.log(err);
         });
     },
-  },
-  created() {
-    // console.log(`${this.reviewNum}`);
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
-    })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
+  }
 };
 </script>
 

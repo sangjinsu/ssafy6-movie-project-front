@@ -69,7 +69,6 @@ export default {
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;
       }
-
       axios({
         method: "post",
         url: `${SERVER_URL}/community/${this.$route.params.movie_id}/reviews/`,
@@ -81,15 +80,15 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.$emit("toggle");
           this.$emit("create-review");
+          this.forms = "";
         })
         .catch((err) => {
           console.log(err);
         });
     },
     onCancel() {
-      this.$emit("toggle");
+
     },
   },
 };

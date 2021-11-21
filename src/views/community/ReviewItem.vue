@@ -16,8 +16,7 @@
     <comment-list
       :reviewNum="this.reviewNum"
       :commentList="this.comments"
-      @delete-comment="deleteComment"
-      :comments="this.comments"
+      @delete-comment="fetchComments"
     >
     </comment-list>
   </div>
@@ -79,17 +78,6 @@ export default {
           console.log(err);
         });
     },
-  },
-  deleteComment() {
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
-    })
-      .then((res) => {
-        console.log(res.data);
-        this.comments = res.data;
-      })
-      .catch((err) => console.log(err));
   },
   created() {
     this.fetchComments();

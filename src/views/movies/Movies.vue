@@ -37,7 +37,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLastestMovies", "getTopMovies"]),
+    ...mapGetters(["getLastestMovies", "getTopMovies", "getUser"]),
     lastestMovieLists() {
       return _.chunk(this.getLastestMovies, 15);
     },

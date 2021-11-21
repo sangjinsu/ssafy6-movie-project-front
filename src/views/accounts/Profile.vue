@@ -3,8 +3,12 @@
 </template>
 
 <script>
+
 export default {
   name: "Profile",
+  computed: {
+
+  },
 };
 </script>
 

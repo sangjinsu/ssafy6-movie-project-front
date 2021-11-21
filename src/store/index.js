@@ -9,7 +9,7 @@ export default new Vuex.Store({
     token: null,
     lastestMovies: null,
     topMovies: null,
-    profile: null,
+    user: null,
   },
   getters: {
     isLogin(state) {
@@ -30,13 +30,14 @@ export default new Vuex.Store({
     getTopMoviesList(state) {
       return state.topMovies
     },
-    getProfile(state) {
-      return state.profile
+    getUser(state) {
+      return state.user
     },
   },
   mutations: {
     LOGOUT(state) {
       state.token = null
+      state.user = null
       localStorage.removeItem('jwt')
     },
     LOGIN(state, token) {
@@ -51,8 +52,8 @@ export default new Vuex.Store({
     GET_TOP_MOVIES(state, topMovies) {
       state.topMovies = topMovies
     },
-    GET_PROFILE(state, profile) {
-      state.profile = profile
+    GET_USER(state, user) {
+      state.user = user
     },
   },
   actions: {
@@ -78,18 +79,21 @@ export default new Vuex.Store({
         .then((res) => commit('GET_TOP_MOVIES', res.data))
         .catch((err) => console.error(err))
     },
-    getProfile({ commit }) {
+    getUser({ commit }) {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/accounts/profile',
+        url: 'http://127.0.0.1:8000/accounts/user',
       })
-        .then((res) => commit('GET_PROFILE', res.data))
+        .then((res) => commit('GET_USER', res.data))
         .catch((err) => console.error(err))
     },
     checkLogin({ commit }) {
       const token = localStorage.getItem('jwt')
       if (token) {
         commit('LOGIN', token)
+        if (this.state.user === null) {
+          this.dispatch('getUser')
+        }
       } else {
         commit('LOGOUT')
       }

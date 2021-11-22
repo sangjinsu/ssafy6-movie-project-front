@@ -34,6 +34,9 @@ export default new Vuex.Store({
     getUserPK(state) {
       return state.userPK
     },
+    getUserName(state) {
+      return state.userName
+    },
   },
   mutations: {
     LOGOUT(state) {

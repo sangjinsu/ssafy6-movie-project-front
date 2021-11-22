@@ -2,7 +2,8 @@
   <div>
     <b-nav
       small
-      type="dark" variant="dark"
+      type="dark"
+      variant="dark"
       class="navbar-expand-md bg-dark fw-bold d-flex bd-highlight mb-4"
     >
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
@@ -46,7 +47,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 a.nav-link {
   color: white;
 }
@@ -54,10 +55,10 @@ a.nav-link {
   margin-left: 16px;
 }
 .dropdown-menu {
-  background-color: #212529  !important;
-  color: white !important
+  background-color: #212529 !important;
+  color: white !important;
 }
 .dropdown-item {
-  color: white
+  color: white;
 }
 </style>

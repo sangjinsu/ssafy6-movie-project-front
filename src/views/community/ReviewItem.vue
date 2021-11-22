@@ -6,9 +6,10 @@
       {{ reviewItem.rank }}
       {{ reviewItem.created_at }}
       {{ reviewItem.updated_at }}
-      <b-icon icon="pencil-square"></b-icon>
+      <b-icon icon="pencil-square" @click="updateReviewItem"></b-icon>
       <button @click="deleteReviewItem">X</button>
     </p>
+    <create-review></create-review>
     <create-comment
       :reviewNum="this.reviewNum"
       @create-comment="fetchComments"
@@ -27,6 +28,7 @@
 import axios from "axios";
 import CreateComment from "@/components/CreateComment.vue";
 import CommentList from "@/components/CommentList";
+import CreateReview from "@/components/CreateReview.vue";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -34,6 +36,7 @@ export default {
   components: {
     CreateComment,
     CommentList,
+    CreateReview,
   },
   data: function () {
     return {
@@ -63,7 +66,19 @@ export default {
           console.log(err);
         });
     },
-
+    updateReviewItem() {
+      axios({
+        method: "put",
+        url: `${SERVER_URL}/community/${this.reviewNum}`,
+      })
+        .then((res) => {
+          console.log(res);
+          this.$emit("updataReview");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     fetchComments() {
       // console.log(this.$store.getters["setToken"])
       axios({

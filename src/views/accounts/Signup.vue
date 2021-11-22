@@ -34,7 +34,6 @@
         type="password"
         id="passwordConfirmation"
         v-model.trim="credentials.passwordConfirmation"
-        @keyup.enter="signup"
       />
     </div>
 

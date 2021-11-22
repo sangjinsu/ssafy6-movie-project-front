@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="reviewItem">
     <p>
       {{ reviewItem.title }}
       {{ reviewItem.content }}
@@ -9,11 +9,11 @@
       <b-icon
         icon="pencil-square"
         @click="updateReviewItem()"
-        v-if="this.userPk == reviewItem.user.pk"
+        v-if="userPk == reviewItem.user.pk"
       ></b-icon>
       <button
         @click="deleteReviewItem"
-        v-if="this.userPk == reviewItem.user.pk"
+        v-if="userPk == reviewItem.user.pk"
       >
         X
       </button>
@@ -21,12 +21,12 @@
 
     <create-review v-if="show"></create-review>
     <create-comment
-      :reviewNum="this.reviewNum"
+      :reviewNum="reviewNum"
       @create-comment="fetchComments"
     ></create-comment>
     <comment-list
-      :reviewNum="this.reviewNum"
-      :commentList="this.comments"
+      :reviewNum="reviewNum"
+      :commentList="comments"
       @delete-comment="fetchComments"
     >
     </comment-list>
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-// const LOCALHOST = process.env.VUE_APP_LOCALHOST
 import axios from "axios";
 import CreateComment from "@/components/CreateComment.vue";
 import CommentList from "@/components/CommentList";
@@ -53,7 +52,7 @@ export default {
     return {
       reviewItem: null,
       reviewNum: `${this.$route.params.review_id}`,
-      comments: Array,
+      comments: [],
       movieId: null,
       show: false,
       userPk: this.$store.state.userPK,

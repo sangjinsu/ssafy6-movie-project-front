@@ -14,10 +14,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import CommentItem from "@/components/CommentItem.vue";
-const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+
 
 export default {
   name: "CommentList",
@@ -41,21 +39,6 @@ export default {
   methods: {
     deleteComment() {
       this.$emit("delete-comment");
-    },
-    fetchComments() {
-      // console.log(this.$store.getters["setToken"])
-      axios({
-        method: "get",
-        url: `${SERVER_URL}/community/${this.reviewNum}/comments/`,
-      })
-        .then((res) => {
-          // console.log(res)
-          this.commentList = res.data;
-          this.show = false;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
 };

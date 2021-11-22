@@ -48,9 +48,10 @@ import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "CreateReview",
+  name: "UpdateReview",
   data() {
     return {
+      reviewNum: `${this.$route.params.review_id}`,
       forms: {
         title: null,
         content: null,
@@ -60,13 +61,14 @@ export default {
   },
   methods: {
     onSubmit(event) {
+      console.log(this.reviewNum);
       event.preventDefault();
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;
       }
       axios({
-        method: "post",
-        url: `${SERVER_URL}/community/${this.$route.params.movie_id}/reviews/`,
+        method: "put",
+        url: `${SERVER_URL}/community/reviews/${this.reviewNum}/`,
         data: {
           title: this.forms.title,
           content: this.forms.content,
@@ -75,15 +77,15 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.$emit("create-review");
-          this.forms = "";
+          this.$emit("update-review");
+          this.$router.go(-1);
         })
         .catch((err) => {
           console.log(err);
         });
     },
     onCancel() {
-      this.$emit("change-form");
+      this.$router.go(-1);
     },
   },
 };

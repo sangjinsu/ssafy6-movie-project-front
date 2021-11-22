@@ -6,10 +6,11 @@
       {{ reviewItem.rank }}
       {{ reviewItem.created_at }}
       {{ reviewItem.updated_at }}
-      <b-icon icon="pencil-square" @click="updateReviewItem"></b-icon>
+      <b-icon icon="pencil-square" @click="updateReviewItem()"></b-icon>
       <button @click="deleteReviewItem">X</button>
     </p>
-    <create-review></create-review>
+
+    <create-review v-if="show"></create-review>
     <create-comment
       :reviewNum="this.reviewNum"
       @create-comment="fetchComments"
@@ -29,6 +30,7 @@ import axios from "axios";
 import CreateComment from "@/components/CreateComment.vue";
 import CommentList from "@/components/CommentList";
 import CreateReview from "@/components/CreateReview.vue";
+
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -44,6 +46,7 @@ export default {
       reviewNum: `${this.$route.params.review_id}`,
       comments: Array,
       movieId: null,
+      show: false,
     };
   },
 
@@ -67,18 +70,12 @@ export default {
         });
     },
     updateReviewItem() {
-      axios({
-        method: "put",
-        url: `${SERVER_URL}/community/${this.reviewNum}`,
-      })
-        .then((res) => {
-          console.log(res);
-          this.$emit("updataReview");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$router.push({
+        name: "UpdateReview",
+        params: { review_id: this.reviewNum },
+      });
     },
+
     fetchComments() {
       // console.log(this.$store.getters["setToken"])
       axios({

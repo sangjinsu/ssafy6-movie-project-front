@@ -21,6 +21,7 @@
       v-else
       @change-form="changeForm"
     ></create-review>
+    <update-review @update-review="fetchReview"></update-review>
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import ReviewList from "@/components/ReviewList.vue";
 import CreateReview from "@/components/CreateReview.vue";
 import LikeMovie from "@/components/LikeMovie.vue";
 import PickMovie from "@/components/PickMovie.vue";
+import UpdateReview from "@/components/UpdateReview.vue";
 import { mapGetters } from "vuex";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -40,6 +42,7 @@ export default {
     CreateReview,
     LikeMovie,
     PickMovie,
+    UpdateReview,
   },
   data: function () {
     return {
@@ -88,6 +91,7 @@ export default {
       url: `${SERVER_URL}/movies/${this.$route.params.movie_id}`,
     })
       .then((res) => {
+        console.log(res.data);
         this.movieItem = res.data;
         this.likeUserList = this.movieItem.like_users;
         this.pickUserList = this.movieItem.pick_users;

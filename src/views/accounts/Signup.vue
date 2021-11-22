@@ -1,67 +1,74 @@
 <template>
-  <div>
-    <span>
+  <div class="view">
+    <!-- <span>
       <router-link :to="{ name: 'Login' }">Login</router-link>
-    </span>
-    <h1>Signup</h1>
-    <div>
-      <label for="username">name: </label>
-      <input type="text" id="username" v-model.trim="credentials.username" />
-    </div>
+    </span> -->
 
-    <!-- username validation -->
-    <div
-      v-if="usernameValidation.errors.length > 0 && !submitted"
-      class="hints"
-    >
-      <p v-for="error in usernameValidation.errors" :key="error.message">
-        {{ error }}
-      </p>
-    </div>
+    <div class="container">
+      <p style="text-align: left; font-weight: bold">회원가입</p>
+      <div>
+        <label for="username"></label>
+        <input
+          type="text"
+          placeholder="이름"
+          id="username"
+          v-model.trim="credentials.username"
+        />
+      </div>
 
-    <div>
-      <label for="password">password: </label>
-      <input
-        type="password"
-        id="password"
-        v-model.trim="credentials.password"
-      />
-    </div>
+      <!-- username validation -->
+      <div
+        v-if="usernameValidation.errors.length > 0 && !submitted"
+        class="hints"
+      >
+        <ul v-for="error in usernameValidation.errors" :key="error.message">
+          <li>
+            {{ error }}
+          </li>
+        </ul>
+      </div>
 
-    <div>
-      <label for="passwordConfirmation">password check: </label>
-      <input
-        type="password"
-        id="passwordConfirmation"
-        v-model.trim="credentials.passwordConfirmation"
-      />
-    </div>
+      <div>
+        <label for="password"></label>
+        <input
+          type="password"
+          id="password"
+          placeholder="비밀번호"
+          v-model.trim="credentials.password"
+        />
+      </div>
 
-    <div
-      v-if="passwordValidation.errors.length > 0 && !submitted"
-      class="hints"
-    >
-      <h2>Hints</h2>
-      <p v-for="error in passwordValidation.errors" :key="error.message">
-        {{ error }}
-      </p>
-    </div>
+      <div>
+        <label for="passwordConfirmation"></label>
+        <input
+          type="password"
+          id="passwordConfirmation"
+          placeholder="비밀번호 확인"
+          v-model.trim="credentials.passwordConfirmation"
+        />
+      </div>
 
-    <div class="matches" v-if="notSamePasswords">
-      <p>Passwords don't match.</p>
-    </div>
+      <div
+        v-if="passwordValidation.errors.length > 0 && !submitted"
+        class="hints"
+      >
+        <ul
+          v-for="error in passwordValidation.errors"
+          :key="error.message"
+          style="margin: 3px"
+        >
+          <li>
+            {{ error }}
+          </li>
+        </ul>
+      </div>
 
-    <button
-      @click="signup"
-      v-if="
-        passwordsFilled &&
-        !notSamePasswords &&
-        passwordValidation.valid &&
-        usernameValidation.valid
-      "
-    >
-      Signup
-    </button>
+      <div class="matches" v-if="notSamePasswords">
+        <p>Passwords don't match.</p>
+      </div>
+
+      <button @click="signup">계정 생성하기</button>
+    </div>
   </div>
 </template>
 
@@ -73,19 +80,20 @@ export default {
   name: "Signup",
   data: function () {
     return {
+      background: { backgroundColor: "#2f3640" },
       credentials: {
         username: "",
         password: "",
         passwordConfirmation: "",
       },
       passwordRules: [
-        { message: "One lowercase letter required.", regex: /[a-z]+/ },
-        { message: "One uppercase letter required.", regex: /[A-Z]+/ },
-        { message: "8 characters minimum.", regex: /^.{8,}/ },
-        { message: "One number required.", regex: /[0-9]+/ },
+        { message: "최소 1개 이상 소문자", regex: /[a-z]+/ },
+        { message: "최소 1개 이상 대문자", regex: /[A-Z]+/ },
+        { message: "최소 8자 이상", regex: /^.{8,}/ },
+        { message: "최소 1개 이상 숫자", regex: /[0-9]+/ },
       ],
       usernameRules: [
-        { message: "8 characters minimum.", regex: /^.{8,}/ },
+        { message: "최소 8자 이상", regex: /^.{8,}/ },
         { message: "20 characters maximum.", regex: /^.{0,20}$/ },
       ],
       submitted: false,
@@ -153,4 +161,41 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.view {
+  height: 100vh;
+}
+.container {
+  width: 400px;
+  background-color: #26282b;
+  color: white;
+  padding: 20px;
+  margin-top: 100px;
+}
+button {
+  background: #c23616;
+  color: white;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+  width: auto;
+
+  border: none;
+  border-radius: 4px;
+  width: 300px;
+  height: 35px;
+}
+.hints {
+  font-size: 13px;
+  text-align: left;
+}
+input {
+  width: 300px;
+  height: 35px;
+  margin-bottom: 5px;
+}
+</style>

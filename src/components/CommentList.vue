@@ -5,7 +5,17 @@
       {{ comment.user }}
       {{ comment.created_at }}
       {{ comment.updated_at }}
-      <button @click="deleteComment(comment.pk)">x</button>
+      <b-icon
+        icon="pencil-square"
+        @click="updateComment(comment.pk)"
+        v-if="userPk == comment.user.pk"
+      ></b-icon>
+      <button
+        @click="deleteComment(comment.pk)"
+        v-if="userPk == comment.user.pk"
+      >
+        x
+      </button>
     </p>
   </div>
 </template>
@@ -19,6 +29,7 @@ export default {
   data: function () {
     return {
       commentId: null,
+      userPk: this.$store.state.userPK,
     };
   },
   props: {
@@ -39,7 +50,7 @@ export default {
           console.log(err);
         });
     },
-  }
+  },
 };
 </script>
 

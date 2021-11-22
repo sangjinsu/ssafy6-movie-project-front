@@ -6,8 +6,17 @@
       {{ reviewItem.rank }}
       {{ reviewItem.created_at }}
       {{ reviewItem.updated_at }}
-      <b-icon icon="pencil-square" @click="updateReviewItem()"></b-icon>
-      <button @click="deleteReviewItem">X</button>
+      <b-icon
+        icon="pencil-square"
+        @click="updateReviewItem()"
+        v-if="this.userPk == reviewItem.user.pk"
+      ></b-icon>
+      <button
+        @click="deleteReviewItem"
+        v-if="this.userPk == reviewItem.user.pk"
+      >
+        X
+      </button>
     </p>
 
     <create-review v-if="show"></create-review>
@@ -30,7 +39,6 @@ import axios from "axios";
 import CreateComment from "@/components/CreateComment.vue";
 import CommentList from "@/components/CommentList";
 import CreateReview from "@/components/CreateReview.vue";
-import UpdateReview from "@/components/UpdateReview.vue";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -48,6 +56,7 @@ export default {
       comments: Array,
       movieId: null,
       show: false,
+      userPk: this.$store.state.userPK,
     };
   },
 
@@ -72,11 +81,9 @@ export default {
     },
     updateReviewItem() {
       this.$router.push({
-        // name: "UpdateReview",
-        path: "/updatereview/:review_id",
-        components: UpdateReview,
+        name: "UpdateReview",
+        // path: "/updatereview/:review_id",
         params: { review_id: this.reviewNum },
-        props: { reviewItem: "2" },
       });
     },
 
@@ -102,7 +109,7 @@ export default {
       url: `${SERVER_URL}/community/reviews/${this.reviewNum}`,
     })
       .then((res) => {
-        // console.log(this.$route.params.review_id);
+        console.log(res.data);
         this.movieId = res.data.movie.id;
         this.reviewItem = res.data;
       })

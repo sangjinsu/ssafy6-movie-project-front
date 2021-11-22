@@ -59,12 +59,9 @@ export default {
       },
     };
   },
-  props: {
-    reviewItem: String,
-  },
+
   methods: {
     onSubmit(event) {
-      console.log(this.reviewItem);
       event.preventDefault();
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;
@@ -90,6 +87,20 @@ export default {
     onCancel() {
       this.$router.go(-1);
     },
+  },
+  created() {
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/community/reviews/${this.reviewNum}/`,
+    })
+      .then((res) => {
+        this.forms.title = res.data.title;
+        this.forms.content = res.data.content;
+        this.forms.rank = res.data.rank;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

@@ -13,15 +13,16 @@ export default {
   name: "UpdateComment",
   data: function () {
     return {
-      content: null,
+      content: this.comment.content,
     };
   },
   props: {
     commentId: Number,
+    comment: Object,
   },
   methods: {
     updateComment() {
-      // console.log(`${this.reviewNum}`);
+      console.log(this.comment);
       const commentItem = {
         content: this.content,
       };

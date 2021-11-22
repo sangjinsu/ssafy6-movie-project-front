@@ -1,34 +1,22 @@
 <template>
   <div>
-    <update-comment
-      v-if="show"
-      :commentId="this.commentId"
-      @update-comment="fetchComments"
-    ></update-comment>
-    <p v-for="comment in commentList" :key="comment.pk">
-      {{ comment.content }}
-      {{ comment.user }}
-      {{ comment.created_at }}
-      {{ comment.updated_at }}
-      {{ comment.pk }}
-      <b-icon
-        icon="pencil-square"
-        @click="updateComment(comment.pk)"
-        v-if="userPk == comment.user.pk"
-      ></b-icon>
-      <button
-        @click="deleteComment(comment.pk)"
-        v-if="userPk == comment.user.pk"
-      >
-        x
-      </button>
+    <p>
+      <comment-item
+        v-for="comment in commentList"
+        :key="comment.pk"
+        :reviewNum="reviewNum"
+        :comment="comment"
+        @delete-comment="deleteComment"
+        @update-comment="deleteComment"
+      ></comment-item>
     </p>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import UpdateComment from "@/components/UpdateComment.vue";
+
+import CommentItem from "@/components/CommentItem.vue";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -41,16 +29,18 @@ export default {
     };
   },
   components: {
-    UpdateComment,
+    CommentItem,
   },
   props: {
-    reviewNum: null,
-    commentList: [],
+    reviewNum: String,
+    commentList: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
-    updateComment(pk) {
-      this.show = true;
-      this.commentId = pk;
+    deleteComment() {
+      this.$emit("delete-comment");
     },
     fetchComments() {
       // console.log(this.$store.getters["setToken"])
@@ -62,19 +52,6 @@ export default {
           // console.log(res)
           this.commentList = res.data;
           this.show = false;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    deleteComment(pk) {
-      axios({
-        method: "delete",
-        url: `${SERVER_URL}/community/comments/${pk}`,
-      })
-        .then((res) => {
-          console.log(res);
-          this.$emit("delete-comment");
         })
         .catch((err) => {
           console.log(err);

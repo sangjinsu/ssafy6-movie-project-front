@@ -59,9 +59,12 @@ export default {
       },
     };
   },
+  props: {
+    reviewItem: String,
+  },
   methods: {
     onSubmit(event) {
-      console.log(this.reviewNum);
+      console.log(this.reviewItem);
       event.preventDefault();
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
         return;

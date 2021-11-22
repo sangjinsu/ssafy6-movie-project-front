@@ -30,6 +30,7 @@ import axios from "axios";
 import CreateComment from "@/components/CreateComment.vue";
 import CommentList from "@/components/CommentList";
 import CreateReview from "@/components/CreateReview.vue";
+import UpdateReview from "@/components/UpdateReview.vue";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -71,8 +72,11 @@ export default {
     },
     updateReviewItem() {
       this.$router.push({
-        name: "UpdateReview",
+        // name: "UpdateReview",
+        path: "/updatereview/:review_id",
+        components: UpdateReview,
         params: { review_id: this.reviewNum },
+        props: { reviewItem: "2" },
       });
     },
 

@@ -21,7 +21,7 @@
       v-else
       @change-form="changeForm"
     ></create-review>
-    <update-review @update-review="fetchReview"></update-review>
+    <update-review @update-review="fetchReview" v-if="false"></update-review>
   </div>
 </template>
 

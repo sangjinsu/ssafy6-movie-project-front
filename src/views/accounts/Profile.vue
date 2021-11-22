@@ -1,6 +1,6 @@
 
 <template>
-  <b-container>  
+  <b-container v-if="profile">  
     <h2>{{profile.username}}</h2>
     <h4>리뷰 개수: {{profile.reviews.length}}</h4>
     <h4>댓글 개수: {{profile.comments.length}}</h4>
@@ -19,7 +19,6 @@
       </ul>
     </div>
   
-
     <div>
       <h4>리뷰</h4>
       <ul>

@@ -26,6 +26,7 @@ export default {
       options: [
         { label: "액션", id: 28 },
         { label: "모험", id: 12 },
+        { label: "코미디", id: 35},
         { label: "애니메이션", id: 16 },
         { label: "범죄", id: 80 },
         { label: "다큐멘터리", id: 99 },

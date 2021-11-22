@@ -31,7 +31,13 @@
             <label>점수:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input v-model="forms.rank" type="number"></b-form-input>
+            <b-form-input
+              v-model="forms.rank"
+              type="number"
+              min="1"
+              max="10"
+              placeholder="5"
+            ></b-form-input>
           </b-col>
         </b-row>
         <b-button type="submit" variant="primary">등록</b-button>

@@ -15,8 +15,13 @@
         >Recommend</b-nav-item
       >
 
-      <v-select v-model="movieSelected" :options="options" class="p-2" @keyup.enter="search"></v-select>
-      
+      <v-select
+        v-model="movieSelected"
+        :options="options"
+        class="p-2"
+        @keyup.enter="search"
+      ></v-select>
+
       <b-nav-item-dropdown
         id="my-nav-dropdown"
         text="User"
@@ -28,12 +33,13 @@
         <b-dropdown-item to="/profile">프로필</b-dropdown-item>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item v-b-modal="'signout-modal'">회원탈퇴</b-dropdown-item>
-        <b-modal 
+        <b-modal
           id="signout-modal"
           title="회원탈퇴?"
           @ok="signout"
           hide-header-close
-          centered>
+          centered
+        >
           <p class="my-4">좋아요와 찜한 영화 및 리뷰가 사라집니다</p>
         </b-modal>
       </b-nav-item-dropdown>
@@ -42,7 +48,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
@@ -71,45 +77,45 @@ export default {
       //   { label: "전쟁", id: 10752 },
       //   { label: "서부", id: 37 },
       // ],
-    }
+    };
   },
   computed: {
-    options(){
-      return this.movieNames.map(movieName => {
+    options() {
+      return this.movieNames.map((movieName) => {
         return {
           label: movieName.title,
-          id: movieName.pk
-        }
-      })
-    }
+          id: movieName.pk,
+        };
+      });
+    },
   },
-  created(){
+  created() {
     axios({
-      method: 'get',
-      url: `${SERVER_URL}/movies/name/`
-    }).then(res => {
-      console.log(res)
-      this.movieNames = res.data
-    })
+      method: "get",
+      url: `${SERVER_URL}/movies/name/`,
+    }).then((res) => {
+      console.log(res);
+      this.movieNames = res.data;
+    });
   },
   methods: {
     logout() {
       this.$store.dispatch("logout");
       this.$router.push({ name: "Login" });
     },
-    signout(){
+    signout() {
       axios({
-        method: 'delete',
+        method: "delete",
         url: `${SERVER_URL}/accounts/delete/`,
       }).then(() => {
         this.$store.dispatch("logout");
         this.$router.push({ name: "Signup" });
-      })
+      });
     },
-    search(event){
-      event.preventDefault()
-      console.log(this.searchMovie)
-    }
+    search(event) {
+      event.preventDefault();
+      console.log(this.searchMovie);
+    },
   },
 };
 </script>

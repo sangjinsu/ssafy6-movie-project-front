@@ -1,12 +1,18 @@
 <template>
   <div>
-    <input
-      type="text"
-      v-model.trim="content"
-      @keyup.enter="createComment"
-      placeholder="내용을 입력하세요."
-    />
-    <button @click="createComment">+</button>
+    <b-row style="margin: 1vh">
+      <b-col sm="9" class="d-flex justify-content-end">
+        <b-form-input
+          type="text"
+          v-model.trim="content"
+          @keyup.enter="createComment"
+          placeholder="내용을 입력하세요."
+        />
+      </b-col>
+      <b-col sm="3" class="d-flex justify-content-start">
+        <button @click="createComment">+</button>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -49,4 +55,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.form-control {
+  width: 70%;
+}
+</style>

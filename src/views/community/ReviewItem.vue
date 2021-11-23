@@ -1,23 +1,61 @@
 <template>
-  <div v-if="reviewItem">
-    <p>
-      {{ reviewItem.title }}
-      {{ reviewItem.content }}
-      {{ reviewItem.rank }}
-      {{ reviewItem.created_at }}
-      {{ reviewItem.updated_at }}
-      <b-icon
-        icon="pencil-square"
-        @click="updateReviewItem()"
-        v-if="userPk == reviewItem.user.pk"
-      ></b-icon>
-      <button
-        @click="deleteReviewItem"
-        v-if="userPk == reviewItem.user.pk"
-      >
-        X
-      </button>
-    </p>
+  <div v-if="reviewItem" class="container h-100">
+    <div
+      class="card text-dark bg-light"
+      style="max-width: 640px; margin: 0px auto"
+    >
+      <div class="card-header d-flex justify-content-between">
+        <h5>작성자: {{ reviewItem.user.username }}</h5>
+        <h5>★: {{ reviewItem.rank }}</h5>
+      </div>
+      <div class="card-body" style="word-break: break-all">
+        <p class="card-title d-flex justify-content-start">
+          {{ reviewItem.title }}
+        </p>
+        <p class="card-text d-flex justify-content-start">
+          {{ reviewItem.content }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-start">
+          작성시간: {{ reviewItem.created_at }}
+        </div>
+        <div class="d-flex bd-highlight">
+          <div class="me-auto bd-highlight">
+            수정시간: {{ reviewItem.updated_at }}
+          </div>
+          <div class="h5 bd-highlight">
+            <b-icon
+              style="margin-right: 0.5em"
+              icon="pencil-square"
+              @click="updateReviewItem()"
+              v-if="userPk == reviewItem.user.pk"
+            ></b-icon>
+            <b-icon
+              icon="x-square"
+              @click="deleteReviewItem"
+              v-if="userPk == reviewItem.user.pk"
+            ></b-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <b-card
+      :header="['작성자: ' + reviewItem.user.username, '★: ' + reviewItem.rank]"
+      text-variant="black"
+      header-tag="header"
+      :footer="[
+        '작성시간: ' + reviewItem.created_at,
+        '수정시간: ' + reviewItem.updated_at,
+      ]"
+      footer-tag="span"
+      footer-class="Object"
+      :title="reviewItem.title"
+      style="max-width: 30rem"
+    >
+      <b-card-text>내용: {{ reviewItem.content }}</b-card-text>
+    </b-card> -->
 
     <create-review v-if="show"></create-review>
     <create-comment
@@ -119,4 +157,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

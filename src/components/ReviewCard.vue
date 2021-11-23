@@ -5,10 +5,14 @@
         class="card text-white bg-dark mb-3 h-100"
         @click="pushReviewItem(review.pk)"
       >
-        <div class="card-header">{{ this.review.rank }}</div>
+        <div class="card-header">★: {{ this.review.rank }}</div>
         <div class="card-body">
-          <h5 class="card-title">{{ this.review.title }}</h5>
-          <p class="card-text">{{ this.review.content }}</p>
+          <h5 class="card-title">
+            <small>제목: </small>{{ this.review.title }}
+          </h5>
+          <p class="card-text">
+            <small>내용: </small>{{ this.review.content }}
+          </p>
         </div>
       </div>
     </div>

@@ -1,51 +1,86 @@
 <template>
-  <div>
+  <div class="container h-100">
     <div
-      class="card mb-3 bg-dark text-white"
-      style="max-width: 1000px; margin: 10vw"
+      class="
+        card
+        mb-3
+        bg-dark
+        text-white
+        d-flex
+        justify-content-center
+        align-items-center
+        h-100
+      "
     >
       <div class="row g-0">
-        <div class="col-md-4 d-flex justify-content-center">
+        <div class="col-md-4">
           <img
             :src="this.poster_path"
             alt="Image"
             class="img-fluid rounded-start"
+            style="height: 100%"
           />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{ movieItem.title }}</h5>
-            <h6>{{ movieItem.original_title }}</h6>
-            <p class="card-text">{{ movieItem.overview }}</p>
-            <div class="card-text">{{ movieItem.popularity }}</div>
-            <div class="card-text">{{ movieItem.release_date }}</div>
-            <div class="card-text">{{ movieItem.vote_average }}</div>
-            <div class="card-text">
-              <small class="text-muted">{{ movieItem.vote_count }}</small>
+            <h4 class="card-title d-flex justify-content-start">
+              {{ movieItem.title }}
+            </h4>
+            <h5 class="d-flex justify-content-start">
+              {{ movieItem.original_title }}
+            </h5>
+            <p class="card-text">
+              <small>{{ movieItem.overview }}</small>
+            </p>
+            <h6 class="card-text d-flex justify-content-start">
+              <small>인기도: {{ movieItem.popularity }}</small>
+            </h6>
+            <h6 class="card-text d-flex justify-content-start">
+              <small>공개일: {{ movieItem.release_date }}</small>
+            </h6>
+            <h6 class="card-text d-flex justify-content-start">
+              <small>평점: {{ movieItem.vote_average }}</small>
+            </h6>
+
+            <div class="d-flex db-highlight">
+              <span class="me-auto bd-highlight">
+                장르:
+                <span v-for="genre in genres" :key="genre.id">
+                  {{ genre.name }}
+                </span>
+              </span>
+              <like-movie
+                :movieId="movieId"
+                :hasUser="hasUser"
+                @add-like="addLike"
+                @delete-like="deleteLike"
+                class="d-inline bd-highlight me-2"
+              ></like-movie>
+              <pick-movie
+                :movieId="movieId"
+                :pickUser="pickUser"
+                @add-pick="addPick"
+                @delete-pick="deletePick"
+                class="d-inline bd-highlight"
+              ></pick-movie>
             </div>
-            <span v-for="genre in genres" :key="genre.id">
-              {{ genre.name }}
-            </span>
           </div>
         </div>
       </div>
     </div>
 
-    <like-movie
-      :movieId="movieId"
-      :hasUser="hasUser"
-      @add-like="addLike"
-      @delete-like="deleteLike"
-    ></like-movie>
-    <pick-movie
-      :movieId="movieId"
-      :pickUser="pickUser"
-      @add-pick="addPick"
-      @delete-pick="deletePick"
-    ></pick-movie>
-    <div class="d-flex justify-content-between" style="padding: 0 2vw">
+    <div class="d-flex justify-content-between">
       <span><h3>Review</h3></span>
-      <span><button @click="changeForm" v-if="show">작성</button></span>
+      <span
+        ><button
+          type="button"
+          class="btn btn-secondary mb-3"
+          @click="changeForm"
+          v-if="show"
+        >
+          작성
+        </button></span
+      >
     </div>
     <review-list :reviews="this.reviews" v-if="show"> </review-list>
     <create-review

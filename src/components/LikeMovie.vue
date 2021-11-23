@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h2">
     <b-icon
       icon="suit-heart"
       variant="danger"

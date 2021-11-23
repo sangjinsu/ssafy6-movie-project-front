@@ -2,7 +2,7 @@
   <swiper-slide>
     <div class="card-group">
       <div
-        class="card text-white bg-dark mb-3"
+        class="card text-white bg-dark mb-3 h-100"
         @click="pushReviewItem(review.pk)"
       >
         <div class="card-header">{{ this.review.rank }}</div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h2">
     <b-icon icon="plus" @click="pickMovie" v-if="!pickUser"></b-icon>
     <b-icon icon="check2" @click="pickMovie" v-else></b-icon>
   </div>

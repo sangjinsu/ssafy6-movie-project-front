@@ -3,10 +3,10 @@
     <b-container fluid>
       <b-form @submit="onSubmit">
         <b-row class="my-1">
-          <b-col sm="3">
+          <b-col sm="2">
             <label>제목:</label>
           </b-col>
-          <b-col sm="9">
+          <b-col sm="10">
             <b-form-input
               v-model.trim="forms.title"
               type="text"
@@ -15,10 +15,10 @@
           </b-col>
         </b-row>
         <b-row class="my-1">
-          <b-col sm="3">
+          <b-col sm="2">
             <label>내용:</label>
           </b-col>
-          <b-col sm="9">
+          <b-col sm="10">
             <b-form-textarea
               v-model.trim="forms.content"
               size="sm"
@@ -28,10 +28,10 @@
           </b-col>
         </b-row>
         <b-row class="my-1">
-          <b-col sm="3">
+          <b-col sm="2">
             <label>평점:</label>
           </b-col>
-          <b-col sm="9">
+          <b-col sm="10">
             <b-form-input
               v-model="forms.rank"
               type="number"
@@ -41,10 +41,15 @@
             ></b-form-input>
           </b-col>
         </b-row>
-        <b-button type="submit" variant="primary">등록</b-button>
-        <b-button type="submit" variant="danger" @click.prevent="onCancel"
-          >취소</b-button
-        >
+        <b-row class="mt-3">
+          <b-col sm="2"></b-col>
+          <b-col sm="10" d-flex justify-content-center>
+            <b-button type="submit" variant="primary">등록</b-button>
+            <b-button type="submit" variant="danger" @click.prevent="onCancel"
+              >취소</b-button
+            >
+          </b-col>
+        </b-row>
       </b-form>
     </b-container>
   </div>

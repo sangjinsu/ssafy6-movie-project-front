@@ -1,27 +1,27 @@
 <template>
-    <b-container style="color: white">
-      <div class="card-0">
-        <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
-      </div>
+  <b-container style="color: white">
+    <div class="card-0">
+      <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
+    </div>
 
-      <div class="card-1">
-        <h2 class="header-title">최신 영화</h2>
-        <movie-image-list
-          v-for="(lastestMovieList, index) in lastestMovieLists"
-          :key="index"
-          :movieList="lastestMovieList"
-        ></movie-image-list>
-      </div>
-      <div class="card-2">
-        <h2 class="header-title">찜한 영화</h2>
-        <movie-image-list :movieList="pickMovies"></movie-image-list>
-      </div>
+    <div class="card-1">
+      <p class="header-title">최신 영화</p>
+      <movie-image-list
+        v-for="(lastestMovieList, index) in lastestMovieLists"
+        :key="index"
+        :movieList="lastestMovieList"
+      ></movie-image-list>
+    </div>
+    <div class="card-2">
+      <p class="header-title">찜한 영화</p>
+      <movie-image-list :movieList="pickMovies"></movie-image-list>
+    </div>
 
-      <div class="card-3">
-        <h2 class="header-title">좋아요한 영화</h2>
-        <movie-image-list :movieList="likeMovies"></movie-image-list>
-      </div>
-    </b-container>
+    <div class="card-3">
+      <p class="header-title">좋아요한 영화</p>
+      <movie-image-list :movieList="likeMovies"></movie-image-list>
+    </div>
+  </b-container>
 </template>
 
 <script>
@@ -93,6 +93,6 @@ export default {
   display: table-cell;
   vertical-align: bottom;
   font-size: 1.4vw;
-  /* font-weight: bold; */
+  font-weight: bold;
 }
 </style>

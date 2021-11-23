@@ -6,7 +6,7 @@
       </div>
 
       <div class="card-1">
-        <h2>최신 영화</h2>
+        <h2 class="header-title">최신 영화</h2>
         <movie-image-list
           v-for="(lastestMovieList, index) in lastestMovieLists"
           :key="index"
@@ -14,12 +14,12 @@
         ></movie-image-list>
       </div>
       <div class="card-2">
-        <h2>찜한 영화</h2>
+        <h2 class="header-title">찜한 영화</h2>
         <movie-image-list :movieList="pickMovies"></movie-image-list>
       </div>
 
       <div class="card-3">
-        <h2>좋아요한 영화</h2>
+        <h2 class="header-title">좋아요한 영화</h2>
         <movie-image-list :movieList="likeMovies"></movie-image-list>
       </div>
     </b-container>
@@ -93,5 +93,11 @@ export default {
 }
 .card-3 {
   margin: 3vw 0;
+}
+.header-title {
+  display: table-cell;
+  vertical-align: bottom;
+  font-size: 1.4vw;
+  /* font-weight: bold; */
 }
 </style>

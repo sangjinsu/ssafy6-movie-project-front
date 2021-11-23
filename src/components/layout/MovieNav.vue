@@ -3,7 +3,8 @@
     <b-nav
       small
       type="dark"
-      class="navbar-expand-md bg-dark fw-bold d-flex bd-highlight mb-4"
+      style="background-color: black"
+      class="navbar-expand-md fw-bold d-flex bd-highlight mb-4"
     >
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
         >Home</b-nav-item
@@ -17,11 +18,14 @@
 
       <b-nav-item-dropdown
         id="my-nav-dropdown"
-        text="User"
         toggle-class="nav-link-custom"
         right
         class="ms-auto p-2 bd-highlight"
       >
+        <template #button-content>
+          <em style="color: white">User</em>
+        </template>
+
         <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
         <b-dropdown-item to="/profile">프로필</b-dropdown-item>
         <b-dropdown-divider></b-dropdown-divider>
@@ -69,17 +73,10 @@ export default {
 </script>
 
 <style scoped>
-a.nav-link {
+.nav-link {
   color: white;
 }
 .navbar-brand {
   margin-left: 16px;
-}
-.dropdown-menu {
-  background-color: #212529 !important;
-  color: white !important;
-}
-.dropdown-item {
-  color: white;
 }
 </style>

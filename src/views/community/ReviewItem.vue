@@ -1,12 +1,16 @@
 <template>
   <div v-if="reviewItem" class="container h-100">
     <div
-      class="card text-dark bg-light"
+      class="card text-white bg-dark"
       style="max-width: 640px; margin: 0px auto"
     >
       <div class="card-header d-flex justify-content-between">
-        <h5>작성자: {{ reviewItem.user.username }}</h5>
-        <h5>★: {{ reviewItem.rank }}</h5>
+        <h5 class="d-flex align-items-center" style="margin-bottom: 0">
+          작성자: {{ reviewItem.user.username }}
+        </h5>
+        <h5 class="d-flex align-items-center" style="margin-bottom: 0">
+          ★: {{ reviewItem.rank }}
+        </h5>
       </div>
       <div class="card-body" style="word-break: break-all">
         <p class="card-title d-flex justify-content-start">
@@ -18,11 +22,11 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-start">
-          작성시간: {{ reviewItem.created_at }}
+          <small>작성시간: {{ reviewItem.created_at }}</small>
         </div>
         <div class="d-flex bd-highlight">
           <div class="me-auto bd-highlight">
-            수정시간: {{ reviewItem.updated_at }}
+            <small>수정시간: {{ reviewItem.updated_at }}</small>
           </div>
           <div class="h5 bd-highlight">
             <b-icon

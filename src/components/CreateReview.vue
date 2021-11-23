@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid>
-      <b-form @submit="onSubmit">
+      <b-form @submit="onSubmit" style="color: white">
         <b-row class="my-1">
           <b-col sm="2">
             <label>제목:</label>
@@ -44,7 +44,12 @@
         <b-row class="mt-3">
           <b-col sm="2"></b-col>
           <b-col sm="10" d-flex justify-content-center>
-            <b-button type="submit" variant="primary">등록</b-button>
+            <b-button
+              type="submit"
+              variant="primary"
+              style="margin-right: 0.5vw"
+              >등록</b-button
+            >
             <b-button type="submit" variant="danger" @click.prevent="onCancel"
               >취소</b-button
             >

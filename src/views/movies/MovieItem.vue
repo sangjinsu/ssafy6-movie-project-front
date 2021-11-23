@@ -70,7 +70,7 @@
     </div>
 
     <div class="d-flex justify-content-between">
-      <span><h3>Review</h3></span>
+      <span style="color: white"><h3>Review</h3></span>
       <span
         ><button
           type="button"

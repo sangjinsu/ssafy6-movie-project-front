@@ -16,7 +16,6 @@
 <script>
 import CommentItem from "@/components/CommentItem.vue";
 
-
 export default {
   name: "CommentList",
   data: function () {

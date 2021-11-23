@@ -1,12 +1,12 @@
 <template>
   <div>
     <div>
-      <p v-if="show">
-        {{ comment.content }}
-        {{ comment.user }}
+      <p v-if="show" style="color: white">
+        작성자: {{ comment.user.username }}
         {{ comment.created_at }}
-        {{ comment.updated_at }}
-        {{ comment.pk }}
+        {{ comment.content }}
+        <!-- {{ comment.updated_at }} -->
+
         <b-icon
           icon="pencil-square"
           @click="updateComment(comment.pk)"

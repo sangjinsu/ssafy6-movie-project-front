@@ -46,6 +46,17 @@
     <div class="mb-5">
       <div class="fw-bold text-start text-white mx-5">
         <h4>리뷰</h4>
+              <!-- 리뷰 페이지네이션 -->
+      <b-pagination
+        v-model="reviewCurrentPage"
+        align="center"
+        :total-rows="reviewRows"
+        :per-page="perPage"
+        first-text="처음"
+        prev-text="이전"
+        next-text="다음"
+        last-text="마지막"
+      ></b-pagination>   
       </div>
     
       <div v-if="profile.reviews.length > 0">
@@ -68,24 +79,15 @@
             <div class="ms-2 me-auto">
               <h5 class="fw-bold">
                 {{review.movie.title}}
-                 {{ review.title.length > 20 ? review.title.slice(0, 20) + '...' : review.title }}
               </h5>
+              <div class="text-start">
+                {{ review.title.length > 20 ? review.title.slice(0, 20) + '...' : review.title }}
+              </div>
             </div>
             <span class="badge rounded-pill fw-bold">RANK {{review.rank}}</span>
           </li>
         </ul>
-        <!-- 리뷰 페이지네이션 -->
-      <b-pagination
-        v-model="reviewCurrentPage"
-        align="center"
-        :total-rows="reviewRows"
-        :per-page="perPage"
-        first-text="First"
-        prev-text="Prev"
-        next-text="Next"
-        last-text="Last"
-        class=""
-      ></b-pagination>    
+ 
     
       </div>
       <div v-else class="fw-bold text-start text-white mx-5">
@@ -96,6 +98,17 @@
     <div class="mb-5">
       <div class="fw-bold text-start text-white mx-5">
         <h4>댓글</h4>
+        <!-- 댓글 페이지네이션 -->
+        <b-pagination
+          v-model="commentCurrentPage"
+          align="center"
+          :total-rows="commentRows"
+          :per-page="perPage"
+          first-text="처음"
+          prev-text="이전"
+          next-text="다음"
+          last-text="마지막"
+        ></b-pagination>  
       </div>
       <div v-if="profile.comments.length > 0">
         <ul class="list-group list-group-flush list-group-numbered mx-5">
@@ -109,18 +122,22 @@
               text-white
               border-bottom
               my-1"
-            v-for="(comment, index) in profile.comments"
+            v-for="(comment, index) in commentsPerPage[commentCurrentPage-1]"
             :key="index"
             @dblclick="onClickReview(comment.review.pk)"
           >
             <div class="ms-2 me-auto">
               <h5 class="fw-bold">
                 {{comment.review.movie.title}}
-                 {{ comment.content.length > 30 ? comment.content.slice(0, 20) + '...' : comment.content }}
               </h5>
+              <div class="text-start">
+                {{ comment.content.length > 30 ? comment.content.slice(0, 20) + '...' : comment.content }}
+              </div>
             </div>
           </li>
         </ul>
+
+
       </div>
       <div v-else class="fw-bold text-start text-white mx-5">
         <h4>댓글이 없네요..</h4>
@@ -145,7 +162,8 @@ export default {
     return {
       profile: null,
       perPage: 10,
-      reviewCurrentPage: 1
+      reviewCurrentPage: 1,
+      commentCurrentPage: 1
     }
   },
   methods: {
@@ -164,11 +182,24 @@ export default {
       return  _.chunk(this.profile.pick_movies, 15);
     },
     reviewsPerPage(){
-      return _.chunk(this.profile.reviews, 10);
+      const sortedReviews = [...this.profile.reviews].sort((a,b) => {
+        return new Date(b.updated_at) - new Date(a.updated_at)
+      })
+      return _.chunk(sortedReviews, 10);
+    },
+    commentsPerPage(){
+      const sortedComments = [...this.profile.comments].sort((a,b) => {
+        return new Date(b.updated_at) - new Date(a.updated_at)
+      })
+      return _.chunk(sortedComments, 10);
     },
     reviewRows(){
       return this.profile.reviews.length
-    }
+    },
+    commentRows(){
+      return this.profile.comments.length
+    },
+
   },
   created() {
     axios({
@@ -181,4 +212,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

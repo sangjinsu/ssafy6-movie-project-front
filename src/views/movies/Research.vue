@@ -1,9 +1,14 @@
 <template>
-  <b-container>
-    <v-select v-model="selected" :options="options"></v-select>
-    <div v-for="(movieList, index) in movieLists" :key="index">
-      <movie-image-list :movieList="movieList"></movie-image-list>
+  <b-container class="">
+    <div class="fw-bold text-start text-white">
+      <h1>Genre</h1>
     </div>
+    <v-select class="style-chooser rounded bg-light text-dark border border-5 border-white fw-bold m-5" v-model="selected" :options="options"></v-select>
+    <transition-group name="list" tag="div">
+      <div class="pb-3" v-for="movieList in movieLists" :key="movieList">
+        <movie-image-list :movieList="movieList"></movie-image-list>
+      </div>
+    </transition-group>
   </b-container>
 </template>
 
@@ -24,6 +29,7 @@ export default {
       genreMovies: null,
       selected: "장르",
       options: [
+        { label: "최신", id: 100 },
         { label: "액션", id: 28 },
         { label: "모험", id: 12 },
         { label: "코미디", id: 35},
@@ -70,6 +76,10 @@ export default {
   },
   methods: {
     research(genres) {
+      if(genres === 100){
+        this.genreMovies = this.getTopMoviesList
+        return 
+      }
       axios({
         method: "get",
         url: `${SERVER_URL}/movies/${genres}/genres/`,
@@ -85,4 +95,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.8s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+</style>

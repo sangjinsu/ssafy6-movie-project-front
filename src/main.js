@@ -11,6 +11,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css'
 
+vSelect.props.components.default = () => ({
+  OpenIndicator: {
+    render: (createElement) => createElement('span', '🔽'),
+  },
+})
+
 Vue.component('v-select', vSelect)
 Vue.use(VueAwesomeSwiper)
 Vue.use(BootstrapVue)

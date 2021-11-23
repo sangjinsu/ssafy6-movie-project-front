@@ -4,7 +4,7 @@
       id="img"
       :src="posterPath"
       class="rounded mx-auto d-block"
-      @click="pushMovieItem"
+      @dblclick="pushMovieItem"
     />
   </swiper-slide>
 </template>

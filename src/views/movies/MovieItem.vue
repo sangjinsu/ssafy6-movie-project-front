@@ -1,6 +1,49 @@
 <template>
   <div>
-    {{ movieItem }}
+    <!-- <div style="margin-top: 60px">
+      {{ movieItem.title }}
+      {{ movieItem.original_title }}
+      {{ movieItem.overview }}
+      {{ movieItem.popularity }}
+      {{ movieItem.release_date }}
+      {{ movieItem.vote_average }}
+      {{ movieItem.vote_count }}
+      <span v-for="genre in genres" :key="genre.id">
+        {{ genre.name }}
+      </span>
+    </div> -->
+
+    <div
+      class="card mb-3 bg-dark text-white"
+      style="max-width: 1000px; margin-top: 60px"
+    >
+      <div class="row g-0">
+        <div class="col-md-4 d-flex justify-content-center">
+          <img
+            :src="this.poster_path"
+            alt="Image"
+            class="img-fluid rounded-start"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ movieItem.title }}</h5>
+            <h6>{{ movieItem.original_title }}</h6>
+            <p class="card-text">{{ movieItem.overview }}</p>
+            <div class="card-text">{{ movieItem.popularity }}</div>
+            <div class="card-text">{{ movieItem.release_date }}</div>
+            <div class="card-text">{{ movieItem.vote_average }}</div>
+            <div class="card-text">
+              <small class="text-muted">{{ movieItem.vote_count }}</small>
+            </div>
+            <span v-for="genre in genres" :key="genre.id">
+              {{ genre.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <like-movie
       :movieId="movieId"
       :hasUser="hasUser"
@@ -52,6 +95,8 @@ export default {
       show: true,
       likeUserList: [],
       pickUserList: [],
+      genres: [],
+      poster_path: null,
     };
   },
   methods: {
@@ -95,6 +140,8 @@ export default {
         this.movieItem = res.data;
         this.likeUserList = this.movieItem.like_users;
         this.pickUserList = this.movieItem.pick_users;
+        this.genres = this.movieItem.genres;
+        this.poster_path = `https://image.tmdb.org/t/p/w200${this.movieItem.poster_path}`;
       })
       .catch((err) => {
         console.log(err);
@@ -112,4 +159,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.card {
+  opacity: 1;
+}
+</style>

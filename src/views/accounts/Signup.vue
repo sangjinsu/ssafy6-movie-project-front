@@ -1,9 +1,13 @@
 <template>
-  <div class="view">
-    <!-- <span>
-      <router-link :to="{ name: 'Login' }">Login</router-link>
-    </span> -->
-
+  <div style="height: 100vh">
+    <span class="button">
+      <router-link
+        :to="{ name: 'Login' }"
+        class="text-decoration-none text-white"
+      >
+        <button class="btn-login">Login</button>
+      </router-link>
+    </span>
     <div class="container">
       <p style="text-align: left; font-weight: bold">회원가입</p>
       <div>
@@ -67,7 +71,7 @@
         <p>Passwords don't match.</p>
       </div>
 
-      <button @click="signup">계정 생성하기</button>
+      <button @click="signup" class="btn-signup">계정 생성하기</button>
     </div>
   </div>
 </template>
@@ -172,7 +176,23 @@ export default {
   padding: 20px;
   margin-top: 100px;
 }
-button {
+.btn-login,
+.btn-login:hover,
+.btn-login:active,
+.btn-login:visited,
+.btn-login:focus {
+  background-color: #757575;
+  border-color: #757575;
+  color: white;
+  border: none;
+}
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.btn-signup {
   background: #c23616;
   color: white;
   font-family: "Noto Sans KR", sans-serif;
@@ -182,7 +202,6 @@ button {
   text-decoration: none;
 
   display: inline-block;
-  width: auto;
 
   border: none;
   border-radius: 4px;

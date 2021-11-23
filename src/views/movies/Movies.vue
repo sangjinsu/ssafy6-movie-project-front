@@ -1,19 +1,29 @@
 <template>
-  <b-container>
-    <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
-    <h1>찜한 영화</h1>
-    <movie-image-list :movieList="pickMovies"></movie-image-list>
+  <div style="color: white">
+    <b-container>
+      <div class="card-0">
+        <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
+      </div>
 
-    <h1>최신 영화</h1>
-    <movie-image-list
-      v-for="(lastestMovieList, index) in lastestMovieLists"
-      :key="index"
-      :movieList="lastestMovieList"
-    ></movie-image-list>
+      <div class="card-1">
+        <h2>최신 영화</h2>
+        <movie-image-list
+          v-for="(lastestMovieList, index) in lastestMovieLists"
+          :key="index"
+          :movieList="lastestMovieList"
+        ></movie-image-list>
+      </div>
+      <div class="card-2">
+        <h2>찜한 영화</h2>
+        <movie-image-list :movieList="pickMovies"></movie-image-list>
+      </div>
 
-    <h1>좋아요한 영화</h1>
-    <movie-image-list :movieList="likeMovies"></movie-image-list>
-  </b-container>
+      <div class="card-3">
+        <h2>좋아요한 영화</h2>
+        <movie-image-list :movieList="likeMovies"></movie-image-list>
+      </div>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -71,4 +81,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card-0 {
+  margin: 3vw 0;
+}
+.card-1 {
+  margin: 3vw 0;
+}
+.card-2 {
+  margin: 3vw 0;
+}
+.card-3 {
+  margin: 3vw 0;
+}
+</style>

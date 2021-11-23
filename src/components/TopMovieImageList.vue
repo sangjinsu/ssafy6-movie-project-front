@@ -1,20 +1,20 @@
 <template>
   <div>
     <swiper class="swiper" :options="swiperOption">
-       <movie-image v-for="movie in movieList" :key="movie.id" :movie="movie"></movie-image>
+       <top-movie-image v-for="movie in movieList" :key="movie.id" :movie="movie"></top-movie-image>
     </swiper>
   </div>
 </template>
 
 <script>
-import MovieImage from '@/components/MovieImage.vue';
+import TopMovieImage from '@/components/TopMovieImage.vue';
 import { Swiper} from 'vue-awesome-swiper'
 
 
 export default {
     name: 'TopMovieImageList',
     components: {
-       MovieImage, Swiper
+       TopMovieImage, Swiper
     },
   props: {
     movieList: {

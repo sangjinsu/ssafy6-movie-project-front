@@ -61,7 +61,7 @@
               text-white
               border-bottom
               my-1"
-            v-for="(review, index) in profile.reviews"
+            v-for="(review, index) in reviewsPerPage[reviewCurrentPage-1]"
             :key="index"
             @dblclick="onClickReview(review.pk)"
           >
@@ -75,12 +75,18 @@
           </li>
         </ul>
         <!-- 리뷰 페이지네이션 -->
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          first-number
-        ></b-pagination>        
+      <b-pagination
+        v-model="reviewCurrentPage"
+        align="center"
+        :total-rows="reviewRows"
+        :per-page="perPage"
+        first-text="First"
+        prev-text="Prev"
+        next-text="Next"
+        last-text="Last"
+        class=""
+      ></b-pagination>    
+    
       </div>
       <div v-else class="fw-bold text-start text-white mx-5">
         <h4>리뷰가 없네요..</h4>
@@ -138,6 +144,8 @@ export default {
   data() {
     return {
       profile: null,
+      perPage: 10,
+      reviewCurrentPage: 1
     }
   },
   methods: {
@@ -154,6 +162,12 @@ export default {
     },
     pickMovieLists(){
       return  _.chunk(this.profile.pick_movies, 15);
+    },
+    reviewsPerPage(){
+      return _.chunk(this.profile.reviews, 10);
+    },
+    reviewRows(){
+      return this.profile.reviews.length
     }
   },
   created() {
@@ -167,4 +181,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

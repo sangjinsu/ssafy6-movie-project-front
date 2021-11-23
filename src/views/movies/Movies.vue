@@ -84,6 +84,7 @@ export default {
 <style scoped>
 .card-0 {
   margin: 3vw 0;
+  padding-top: 1vw;
 }
 .card-1 {
   margin: 3vw 0;

@@ -4,7 +4,7 @@
       small
       type="dark"
       style="background-color: black"
-      class="navbar-expand-md fw-bold d-flex bd-highlight mb-4"
+      class="navbar-expand-md fw-bold d-flex bd-highlight mb-4 fixed-top"
     >
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
         >Home</b-nav-item
@@ -20,7 +20,7 @@
         id="my-nav-dropdown"
         toggle-class="nav-link-custom"
         right
-        class="ms-auto p-2 bd-highlight"
+        class="ms-auto p-2"
       >
         <template #button-content>
           <em style="color: white">User</em>

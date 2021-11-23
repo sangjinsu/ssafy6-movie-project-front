@@ -1,15 +1,17 @@
 <template>
   <div>
-    <b-row style="margin: 1vh">
-      <b-col sm="9" class="d-flex justify-content-end">
+    <b-row style="max-width: 640px; margin: 0px auto">
+      <b-col
+        class="d-flex justify-content-between"
+        style="padding: 0px; margin: 1vw 0"
+      >
         <b-form-input
           type="text"
           v-model.trim="content"
           @keyup.enter="createComment"
           placeholder="내용을 입력하세요."
+          style="width: 600px"
         />
-      </b-col>
-      <b-col sm="3" class="d-flex justify-content-start">
         <button @click="createComment">+</button>
       </b-col>
     </b-row>

@@ -5,7 +5,6 @@
         작성자: {{ comment.user.username }}
         {{ comment.created_at }}
         {{ comment.content }}
-        <!-- {{ comment.updated_at }} -->
 
         <b-icon
           icon="pencil-square"

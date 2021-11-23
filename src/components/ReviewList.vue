@@ -24,29 +24,40 @@
       </b-card-group>
     </div> -->
 
-    <div class="card-group">
-      <div
-        class="card text-white bg-dark mb-3"
-        v-for="review in reviews"
-        :key="review.pk"
-        @click="pushReviewItem(review.pk)"
-      >
-        <div class="card-header">{{ review.rank }}</div>
-        <div class="card-body">
-          <h5 class="card-title">{{ review.title }}</h5>
-          <p class="card-text">{{ review.content }}</p>
-        </div>
-      </div>
-    </div>
+    <swiper :options="swiperOption">
+      <review-card v-for="review in reviews" :key="review.pk" :review="review">
+      </review-card>
+    </swiper>
   </div>
 </template>
 
 <script>
+import ReviewCard from "@/components/ReviewCard.vue";
+import { Swiper } from "vue-awesome-swiper";
+
 export default {
   name: "ReviewList",
-
+  components: { ReviewCard, Swiper },
   props: {
     reviews: Array,
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 6,
+        spaceBetween: 5,
+        slidesPerGroup: 5,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      },
+    };
   },
   methods: {
     createReview() {
@@ -54,12 +65,6 @@ export default {
     },
     changeForm() {
       this.$emit("change-form");
-    },
-    pushReviewItem(pk) {
-      this.$router.push({
-        name: "ReviewItem",
-        params: { review_id: pk },
-      });
     },
   },
 };

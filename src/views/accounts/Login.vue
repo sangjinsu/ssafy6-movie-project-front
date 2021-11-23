@@ -10,8 +10,10 @@
     <div
       class="text-white h-100 d-flex align-items-center justify-content-center"
     >
-      <div style="background-color: #26282b" class="rounded p-5">
-        <h1 class="mb-4">로그인</h1>
+      <div style="background-color: #26282b" class="rounded p-5 w-50">
+        <div class="text-start">
+          <h1 class="mb-4">로그인</h1>
+        </div>
         <div class="mb-3 text-start">
           <label for="username" class="form-label">아이디</label>
           <input

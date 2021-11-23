@@ -47,7 +47,9 @@
       <div class="fw-bold text-start text-white mx-5">
         <h4>리뷰</h4>
       </div>
+    
       <div v-if="profile.reviews.length > 0">
+        <!-- 리뷰 리스트 -->
         <ul class="list-group list-group-flush list-group-numbered mx-5">
           <li 
             class="
@@ -66,12 +68,19 @@
             <div class="ms-2 me-auto">
               <h5 class="fw-bold">
                 {{review.movie.title}}
-                <span class="badge rounded-pill">RANK {{review.rank}}</span>
                  {{ review.title.length > 20 ? review.title.slice(0, 20) + '...' : review.title }}
               </h5>
             </div>
+            <span class="badge rounded-pill fw-bold">RANK {{review.rank}}</span>
           </li>
         </ul>
+        <!-- 리뷰 페이지네이션 -->
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          first-number
+        ></b-pagination>        
       </div>
       <div v-else class="fw-bold text-start text-white mx-5">
         <h4>리뷰가 없네요..</h4>

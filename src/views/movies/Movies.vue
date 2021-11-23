@@ -1,6 +1,5 @@
 <template>
-  <div style="color: white">
-    <b-container>
+    <b-container style="color: white">
       <div class="card-0">
         <top-movie-image-list :movieList="getTopMovies"></top-movie-image-list>
       </div>
@@ -23,7 +22,6 @@
         <movie-image-list :movieList="likeMovies"></movie-image-list>
       </div>
     </b-container>
-  </div>
 </template>
 
 <script>
@@ -82,10 +80,6 @@ export default {
 </script>
 
 <style scoped>
-.card-0 {
-  margin: 3vw 0;
-  padding-top: 1vw;
-}
 .card-1 {
   margin: 3vw 0;
 }

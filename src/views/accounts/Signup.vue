@@ -1,79 +1,96 @@
 <template>
-  <div style="height: 100vh">
-    <span class="button">
-      <router-link
-        :to="{ name: 'Login' }"
-        class="text-decoration-none text-white"
-      >
-        <button class="btn-login">Login</button>
-      </router-link>
-    </span>
-    <div class="container">
-      <p style="text-align: left; font-weight: bold">회원가입</p>
-      <div>
-        <label for="username"></label>
-        <input
-          type="text"
-          placeholder="이름"
-          id="username"
-          v-model.trim="credentials.username"
-        />
-      </div>
+  <b-container style="height: 100vh">
+    <router-link
+      :to="{ name: 'Login' }"
+      class="text-decoration-none text-white float-end pt-5"
+    >
+      <b-button class="btn-login">Login</b-button>
+    </router-link>
 
-      <!-- username validation -->
-      <div
-        v-if="usernameValidation.errors.length > 0 && !submitted"
-        class="hints"
-      >
-        <ul v-for="error in usernameValidation.errors" :key="error.message">
-          <li>
-            {{ error }}
-          </li>
-        </ul>
-      </div>
+    <div
+      class="text-white h-100 d-flex align-items-center justify-content-center"
+    >
+      <div style="background-color: #26282b" class="rounded p-5 w-50">
+        <div>
+          <div class="text-start">
+            <h1>회원가입</h1>
+          </div>
+   
+          <div class="mb-3 text-start">
+            <label for="username"></label>
+            <input
+              type="text"
+              placeholder="아이디"
+              id="username"
+              v-model.trim="credentials.username"
+              class="form-control"
+            />
+          </div>
 
-      <div>
-        <label for="password"></label>
-        <input
-          type="password"
-          id="password"
-          placeholder="비밀번호"
-          v-model.trim="credentials.password"
-        />
-      </div>
 
-      <div>
-        <label for="passwordConfirmation"></label>
-        <input
-          type="password"
-          id="passwordConfirmation"
-          placeholder="비밀번호 확인"
-          v-model.trim="credentials.passwordConfirmation"
-        />
-      </div>
+          <!-- username validation -->
+          <div
+           v-if="usernameValidation.errors.length > 0 && !submitted"
+          >
+            <ul class="list-unstyled" v-for="error in usernameValidation.errors" :key="error.message">
+              <li>
+                {{ error }}
+              </li>
+           </ul>
+          </div>
+        </div>
 
-      <div
-        v-if="passwordValidation.errors.length > 0 && !submitted"
-        class="hints"
-      >
-        <ul
-          v-for="error in passwordValidation.errors"
-          :key="error.message"
-          style="margin: 3px"
-        >
-          <li>
-            {{ error }}
-          </li>
-        </ul>
-      </div>
 
-      <div class="matches" v-if="notSamePasswords">
-        <p>Passwords don't match.</p>
-      </div>
+        <div>
+          <div class="text-start">
+            <label for="password"></label>
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호"
+              v-model.trim="credentials.password"
+              class="form-control"
+            />
+          </div>
 
-      <button @click="signup" class="btn-signup">계정 생성하기</button>
+          <div class="mb-3 text-start">
+            <label for="passwordConfirmation"></label>
+            <input
+              type="password"
+              id="passwordConfirmation"
+              placeholder="비밀번호 확인"
+              v-model.trim="credentials.passwordConfirmation"
+              class="form-control"
+            />
+          </div>
+
+          <div
+            v-if="passwordValidation.errors.length > 0 && !submitted"
+          >
+          <ul
+            v-for="error in passwordValidation.errors"
+            :key="error.message"
+            class="list-unstyled"
+           >
+            <li>
+              {{ error }}
+            </li>
+          </ul>
+          </div>
+
+      
+          <div class="matches" v-if="notSamePasswords">
+            <p>비밀번호가 일치하지 않습니다</p>
+          </div>
+        </div>
+        
+        <div class="d-grid">
+          <b-button v-if='passwordsFilled && !notSamePasswords && passwordValidation.valid && usernameValidation.valid' @click="signup" class="btn-signup btn-block">계정 생성하기</b-button>
+        </div>
+        
+      </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -166,16 +183,6 @@ export default {
 </script>
 
 <style scoped>
-.view {
-  height: 100vh;
-}
-.container {
-  width: 400px;
-  background-color: #26282b;
-  color: white;
-  padding: 20px;
-  margin-top: 100px;
-}
 .btn-login,
 .btn-login:hover,
 .btn-login:active,
@@ -186,35 +193,15 @@ export default {
   color: white;
   border: none;
 }
-.button {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-.btn-signup {
-  background: #c23616;
+.btn-signup,
+.btn-signup:hover,
+.btn-signup:active,
+.btn-signup:visited,
+.btn-signup:focus {
+  background-color: #c23616;
+  border-color: #c23616;
   color: white;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
-  text-decoration: none;
-
-  display: inline-block;
-
   border: none;
-  border-radius: 4px;
-  width: 300px;
-  height: 35px;
 }
-.hints {
-  font-size: 13px;
-  text-align: left;
-}
-input {
-  width: 300px;
-  height: 35px;
-  margin-bottom: 5px;
-}
+
 </style>

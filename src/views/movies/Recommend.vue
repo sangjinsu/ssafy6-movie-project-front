@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <div class="fw-bold text-start text-white my-5">
+    <div class="fw-bold text-start text-white mb-5">
       <h1>Recommend for U</h1>
     </div>
 

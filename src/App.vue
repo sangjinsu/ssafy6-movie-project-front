@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <movie-nav v-if="isLogin"></movie-nav>
-    <router-view />
+    <div class="pt-5 mt-5">
+      <router-view />
+    </div>
   </div>
 </template>
 

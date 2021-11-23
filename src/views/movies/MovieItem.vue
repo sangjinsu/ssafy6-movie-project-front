@@ -1,21 +1,8 @@
 <template>
   <div>
-    <!-- <div style="margin-top: 60px">
-      {{ movieItem.title }}
-      {{ movieItem.original_title }}
-      {{ movieItem.overview }}
-      {{ movieItem.popularity }}
-      {{ movieItem.release_date }}
-      {{ movieItem.vote_average }}
-      {{ movieItem.vote_count }}
-      <span v-for="genre in genres" :key="genre.id">
-        {{ genre.name }}
-      </span>
-    </div> -->
-
     <div
       class="card mb-3 bg-dark text-white"
-      style="max-width: 1000px; margin-top: 60px"
+      style="max-width: 1000px; margin: 10vw"
     >
       <div class="row g-0">
         <div class="col-md-4 d-flex justify-content-center">
@@ -56,9 +43,11 @@
       @add-pick="addPick"
       @delete-pick="deletePick"
     ></pick-movie>
-    <span>Review</span>
-    <review-list :reviews="this.reviews" @change-form="changeForm" v-if="show">
-    </review-list>
+    <div class="d-flex justify-content-between" style="padding: 0 2vw">
+      <span><h3>Review</h3></span>
+      <span><button @click="changeForm" v-if="show">작성</button></span>
+    </div>
+    <review-list :reviews="this.reviews" v-if="show"> </review-list>
     <create-review
       @create-review="fetchReview"
       v-else

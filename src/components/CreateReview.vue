@@ -19,11 +19,12 @@
             <label>내용:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input
+            <b-form-textarea
               v-model.trim="forms.content"
-              type="text"
               size="sm"
-            ></b-form-input>
+              rows="3"
+              max-rows="6"
+            ></b-form-textarea>
           </b-col>
         </b-row>
         <b-row class="my-1">

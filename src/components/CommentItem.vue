@@ -1,17 +1,30 @@
 <template>
-  <div v-if="show" style="color: white">
-    작성자: {{ comment.user.username }}
-    {{ comment.created_at }}
-    {{ comment.content }}
+  <div v-if="show" style="color: white; max-width: 640px; margin: 0px auto">
+    <div class="d-flex bd-highlight">
+      <div class="me-auto bd-highlight">
+        <small style="margin-right: 1vw"
+          >작성자: {{ comment.user.username }}</small
+        >
+        <small>{{ comment.created_at }}</small>
+      </div>
 
-    <b-icon
-      icon="pencil-square"
-      @click="updateComment(comment.pk)"
-      v-if="userPk == comment.user.pk"
-    ></b-icon>
-    <button @click="deleteComment(comment.pk)" v-if="userPk == comment.user.pk">
-      x
-    </button>
+      <b-icon
+        class="bd-highlight"
+        style="margin-right: 0.5vw"
+        icon="pencil-square"
+        @click="updateComment(comment.pk)"
+        v-if="userPk == comment.user.pk"
+      ></b-icon>
+      <b-icon
+        class="bd-highlight"
+        icon="x-square"
+        @click="deleteComment(comment.pk)"
+        v-if="userPk == comment.user.pk"
+      ></b-icon>
+    </div>
+    <h4 class="d-flex justify-content-start">
+      {{ comment.content }}
+    </h4>
   </div>
   <update-comment
     v-else

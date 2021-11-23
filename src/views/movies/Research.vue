@@ -1,5 +1,5 @@
 <template>
-  <b-container class="">
+  <b-container>
     <div class="fw-bold text-start text-white">
       <h1>Genre</h1>
     </div>

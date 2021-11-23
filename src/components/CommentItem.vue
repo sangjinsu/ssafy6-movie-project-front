@@ -1,31 +1,24 @@
 <template>
-  <div>
-    <div>
-      <p v-if="show" style="color: white">
-        작성자: {{ comment.user.username }}
-        {{ comment.created_at }}
-        {{ comment.content }}
+  <div v-if="show" style="color: white">
+    작성자: {{ comment.user.username }}
+    {{ comment.created_at }}
+    {{ comment.content }}
 
-        <b-icon
-          icon="pencil-square"
-          @click="updateComment(comment.pk)"
-          v-if="userPk == comment.user.pk"
-        ></b-icon>
-        <button
-          @click="deleteComment(comment.pk)"
-          v-if="userPk == comment.user.pk"
-        >
-          x
-        </button>
-      </p>
-      <update-comment
-        v-else
-        :commentId="this.commentId"
-        @update-comment="fetchComments"
-        :comment="this.comment"
-      ></update-comment>
-    </div>
+    <b-icon
+      icon="pencil-square"
+      @click="updateComment(comment.pk)"
+      v-if="userPk == comment.user.pk"
+    ></b-icon>
+    <button @click="deleteComment(comment.pk)" v-if="userPk == comment.user.pk">
+      x
+    </button>
   </div>
+  <update-comment
+    v-else
+    :commentId="this.commentId"
+    @update-comment="fetchComments"
+    :comment="this.comment"
+  ></update-comment>
 </template>
 
 <script>

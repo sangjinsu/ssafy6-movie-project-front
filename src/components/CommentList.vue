@@ -1,15 +1,13 @@
 <template>
   <div>
-    <p>
-      <comment-item
-        v-for="comment in commentList"
-        :key="comment.pk"
-        :reviewNum="reviewNum"
-        :comment="comment"
-        @delete-comment="deleteComment"
-        @update-comment="deleteComment"
-      ></comment-item>
-    </p>
+    <comment-item
+      v-for="comment in commentList"
+      :key="comment.pk"
+      :reviewNum="reviewNum"
+      :comment="comment"
+      @delete-comment="deleteComment"
+      @update-comment="deleteComment"
+    ></comment-item>
   </div>
 </template>
 

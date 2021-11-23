@@ -73,16 +73,43 @@
           </li>
         </ul>
       </div>
-      <div class="mt-5">
-        <b-pagination v-model="currentPage" :total-rows="rows" align="center"></b-pagination>
+      <div v-else class="fw-bold text-start text-white mx-5">
+        <h4>리뷰가 없네요..</h4>
       </div>
     </div>
 
-    <div>
-      <h4>댓글</h4>
-      <ul>
-        <li v-for="(comment, index) in profile.comments" :key="index">{{comment}}</li>
-      </ul>
+    <div class="mb-5">
+      <div class="fw-bold text-start text-white mx-5">
+        <h4>댓글</h4>
+      </div>
+      <div v-if="profile.comments.length > 0">
+        <ul class="list-group list-group-flush list-group-numbered mx-5">
+          <li 
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-start
+              bg-transparent
+              text-white
+              border-bottom
+              my-1"
+            v-for="(comment, index) in profile.comments"
+            :key="index"
+            @dblclick="onClickReview(comment.review.pk)"
+          >
+            <div class="ms-2 me-auto">
+              <h5 class="fw-bold">
+                {{comment.review.movie.title}}
+                 {{ comment.content.length > 30 ? comment.content.slice(0, 20) + '...' : comment.content }}
+              </h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div v-else class="fw-bold text-start text-white mx-5">
+        <h4>댓글이 없네요..</h4>
+      </div>
     </div>
   </b-container>
 </template>
@@ -101,7 +128,7 @@ export default {
   },
   data() {
     return {
-      profile: null
+      profile: null,
     }
   },
   methods: {
@@ -110,7 +137,7 @@ export default {
         name: "ReviewItem",
         params: { review_id},
       });
-    }
+    },
   },
   computed: {
     likeMovieLists(){
@@ -127,7 +154,7 @@ export default {
     })
       .then(res => this.profile = res.data)
       .catch(err => console.error(err))
-  }
+  },
 };
 </script>
 

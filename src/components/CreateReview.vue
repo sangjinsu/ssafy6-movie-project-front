@@ -8,7 +8,7 @@
           </b-col>
           <b-col sm="9">
             <b-form-input
-              v-model="forms.title"
+              v-model.trim="forms.title"
               type="text"
               size="sm"
             ></b-form-input>
@@ -20,7 +20,7 @@
           </b-col>
           <b-col sm="9">
             <b-form-input
-              v-model="forms.content"
+              v-model.trim="forms.content"
               type="text"
               size="sm"
             ></b-form-input>
@@ -28,7 +28,7 @@
         </b-row>
         <b-row class="my-1">
           <b-col sm="3">
-            <label>점수:</label>
+            <label>평점:</label>
           </b-col>
           <b-col sm="9">
             <b-form-input
@@ -36,7 +36,7 @@
               type="number"
               min="1"
               max="10"
-              placeholder="5"
+              placeholder="1-10"
             ></b-form-input>
           </b-col>
         </b-row>

@@ -29,10 +29,10 @@
       >
 
       <b-nav-form @submit.prevent="onSubmit">
-        <b-form-input :select-size="4"  list="movie-list" v-model="searchItem" ></b-form-input>
+        <b-form-input list="movie-list" v-model="searchItem" placeholder="영화 검색" trim ></b-form-input>
 
-        <datalist id="movie-list"  >
-          <option  v-for="(movie, index) in movies" :key="index">{{ movie.title }}</option>
+        <datalist id="movie-list" v-if="searchItem.length > 0">
+          <option   v-for="(movie, index) in movies" :key="index">{{ movie.title }}</option>
         </datalist>
       </b-nav-form>
 
@@ -66,6 +66,7 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash"
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
@@ -91,7 +92,7 @@ export default {
       });
     },
     onSubmit(){
-      const movie = this.movies.find(movie => movie.title === this.searchItem)
+      const movie = _.find(this.movies, movie => movie.title === this.searchItem)
       
       if(!movie) return
 
@@ -99,14 +100,15 @@ export default {
         name: "MovieItem",
         params: { movie_id: movie.pk },
       })
-    }
+
+      this.searchItem = ''
+    },
   },
   created(){
     axios({
       method: 'get',
       url: `${SERVER_URL}/movies/name`
     }).then(res=>{
-      console.log(res.data)
       this.movies = Object.freeze(res.data)
     }).catch(err => {
       console.error(err)

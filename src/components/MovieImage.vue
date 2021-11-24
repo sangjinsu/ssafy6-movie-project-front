@@ -62,6 +62,5 @@ export default {
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
-  border: 2px solid white;
 }
 </style>

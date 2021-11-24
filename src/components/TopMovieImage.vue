@@ -1,6 +1,6 @@
 <template>
   <swiper-slide>
-    <div class="card mb-3 mx-auto" style="max-width: 540px;">
+    <div class="card mb-3 mx-auto" style="max-width: 33.75rem;" @dblclick="pushMovieItem">
       <div class="row g-0">
         <div class="col-md-4">
           <img :src="posterPath" class="img-fluid rounded-start" alt="...">

@@ -151,12 +151,10 @@ import axios from 'axios';
 import _ from "lodash";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
-import MovieImageList from "@/components/MovieImageList.vue";
-
 export default {
   name: "Profile",
   components: {
-    MovieImageList
+    MovieImageList : () => import('@/components/MovieImageList.vue')
   },
   data() {
     return {

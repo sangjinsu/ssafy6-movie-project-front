@@ -15,21 +15,21 @@
 <script>
 import axios from "axios";
 import _ from "lodash";
-import MovieImageList from "@/components/MovieImageList.vue";
 import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Research",
   components: {
-    MovieImageList,
+    MovieImageList : () => import("@/components/MovieImageList.vue"),
   },
   data: function () {
     return {
       genreMovies: null,
       selected: "장르",
       options: [
-        { label: "최신", id: 100 },
+        { label: "인기", id: 100 },
+        { label: "최신", id: 200 },
         { label: "액션", id: 28 },
         { label: "모험", id: 12 },
         { label: "코미디", id: 35},
@@ -56,9 +56,12 @@ export default {
     if (this.getTopMoviesList === null){
       this.$store.dispatch('getTopMovies')
     }
+    if (this.getLastestMoviesList === null) {
+      this.$store.dispatch('getLastestMovies')
+    }
   },
   computed: {
-    ...mapGetters(["getTopMoviesList"]),
+    ...mapGetters(["getTopMoviesList", "getLastestMoviesList"]),
     movies(){
       if (this.genreMovies === null){
         return this.getTopMoviesList
@@ -79,6 +82,10 @@ export default {
       if(genres === 100){
         this.genreMovies = this.getTopMoviesList
         return 
+      }
+      if(genres === 200){
+        this.genreMovies = this.getLastestMoviesList
+        return
       }
       axios({
         method: "get",

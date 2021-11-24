@@ -39,14 +39,13 @@
 <script>
 import axios from "axios";
 import _ from "lodash";
-import MovieImageList from "@/components/MovieImageList.vue";
 import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Recommend",
   components: {
-    MovieImageList,
+    MovieImageList: () => import("@/components/MovieImageList.vue"),
   },
   data() {
     return {

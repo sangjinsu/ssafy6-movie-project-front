@@ -18,18 +18,19 @@ export default new Vuex.Store({
     },
     getLastestMovies(state) {
       if (state.lastestMovies) {
-        return state.lastestMovies.slice(0, 30)
+        return [...state.lastestMovies].slice(0, 42)
       }
-      return state.lastestMovies
     },
     getTopMovies(state) {
       if (state.topMovies) {
-        return state.topMovies.slice(0, 3)
+        return [...state.topMovies].slice(0, 42)
       }
-      return state.topMovies
     },
     getTopMoviesList(state) {
       return state.topMovies
+    },
+    getLastestMoviesList(state) {
+      return state.lastestMovies
     },
     getUserPK(state) {
       return state.userPK
@@ -52,10 +53,10 @@ export default new Vuex.Store({
       localStorage.setItem('jwt', token)
     },
     GET_LASTEST_MOVIES(state, lastestMovies) {
-      state.lastestMovies = lastestMovies
+      state.lastestMovies = Object.freeze(lastestMovies)
     },
     GET_TOP_MOVIES(state, topMovies) {
-      state.topMovies = topMovies
+      state.topMovies = Object.freeze(topMovies)
     },
     GET_USER(state, user) {
       state.userPK = user.pk

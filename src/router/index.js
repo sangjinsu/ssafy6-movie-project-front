@@ -1,16 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '@/views/accounts/Login.vue'
-import Profile from '@/views/accounts/Profile.vue'
-import Signup from '@/views/accounts/Signup.vue'
-import CreateReview from '@/components/CreateReview.vue'
-import ReviewItem from '@/views/community/ReviewItem.vue'
-import MovieItem from '@/views/movies/MovieItem.vue'
-import Movies from '@/views/movies/Movies.vue'
-import Recommend from '@/views/movies/Recommend.vue'
-import Research from '@/views/movies/Research.vue'
-import UpdateReview from '@/components/UpdateReview.vue'
 
 import store from '../store'
 
@@ -38,74 +27,74 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
     beforeEnter: beforeAuth(false),
   },
   {
     path: '/signup',
     name: 'Signup',
-    component: Signup,
+    component: () => import('@/views/accounts/Signup.vue'),
     beforeEnter: beforeAuth(false),
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () => import('@/views/Home.vue'),
     beforeEnter: beforeAuth(false),
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile,
+    component: () => import('@/views/accounts/Profile.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/review/:review_id',
     name: 'ReviewItem',
-    component: ReviewItem,
+    component: () => import('@/views/community/ReviewItem.vue'),
     props: true,
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/createreview',
     name: 'CreateReview',
-    component: CreateReview,
+    component: () => import('@/components/CreateReview.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/updatereview/:review_id',
     name: 'UpdateReview',
-    component: UpdateReview,
+    component: () => import('@/components/UpdateReview.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/movies',
     name: 'Movies',
-    component: Movies,
+    component: () => import('@/views/movies/Movies.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/research',
     name: 'Research',
-    component: Research,
+    component: () => import('@/views/movies/Research.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/movies/:movie_id',
     name: 'MovieItem',
-    component: MovieItem,
+    component: () => import('@/views/movies/MovieItem.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/recommend',
     name: 'Recommend',
-    component: Recommend,
+    component: () => import('@/views/movies/Recommend.vue'),
     beforeEnter: beforeAuth(true),
   },
   {
     path: '/*',
     name: 'Extra',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
     beforeEnter: beforeAuth(false),
   },
 ]

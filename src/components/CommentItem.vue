@@ -5,7 +5,7 @@
         <small style="margin-right: 1vw"
           >작성자: {{ comment.user.username }}</small
         >
-        <small>{{ comment.created_at }}</small>
+        <small>{{ new Date(comment.created_at).toLocaleString() }}</small>
       </div>
 
       <b-icon

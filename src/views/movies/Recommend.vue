@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <div class="fw-bold text-start text-white mb-5">
-      <h1>Recommend for U</h1>
+      <h1>당신만을 위한 영화 추천</h1>
     </div>
 
     <div class="mb-5">

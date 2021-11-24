@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-container fluid>
-      <b-form @submit="onSubmit" style="color: white">
-        <b-row class="my-1">
-          <b-col sm="2">
-            <label for="title-live">제목:</label>
+    <b-container>
+      <b-form @submit="onSubmit" class="text-white">
+        <b-row class="my-2">
+          <b-col sm="1" class="text-end">
+            <label for="title-live">제목</label>
           </b-col>
-          <b-col sm="10">
+          <b-col sm="11">
             <b-form-input
               id="title-live"
               v-model.trim="forms.title"
@@ -20,11 +20,11 @@
             </b-form-invalid-feedback>
           </b-col>
         </b-row>
-        <b-row class="my-1">
-          <b-col sm="2">
-            <label>내용:</label>
+        <b-row class="my-2">
+          <b-col sm="1" class="text-end">
+            <label>내용</label>
           </b-col>
-          <b-col sm="10">
+          <b-col sm="11">
             <b-form-textarea
               v-model.trim="forms.content"
               size="sm"
@@ -33,11 +33,11 @@
             ></b-form-textarea>
           </b-col>
         </b-row>
-        <b-row class="my-1">
-          <b-col sm="2">
-            <label>평점:</label>
+        <b-row class="my-2">
+          <b-col sm="1" class="text-end">
+            <label>평점</label>
           </b-col>
-          <b-col sm="10">
+          <b-col sm="11">
             <b-form-input
               v-model="forms.rank"
               type="number"
@@ -53,7 +53,7 @@
             <b-button
               type="submit"
               variant="primary"
-              style="margin-right: 0.5vw"
+              class="me-2"
               >등록</b-button
             >
             <b-button type="submit" variant="danger" @click.prevent="onCancel"

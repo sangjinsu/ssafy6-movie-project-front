@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <div class="fw-bold text-start text-white">
-      <h1>Genre</h1>
+      <h1>장르</h1>
     </div>
     <v-select class="style-chooser rounded bg-light text-dark border border-5 border-white fw-bold m-5" v-model="selected" :options="options"></v-select>
     <transition-group name="list" tag="div">

@@ -22,11 +22,11 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-start">
-          <small>작성시간: {{ reviewItem.created_at }}</small>
+          <small>작성시간  {{ new Date(reviewItem.created_at).toLocaleString() }}</small>
         </div>
         <div class="d-flex bd-highlight">
           <div class="me-auto bd-highlight">
-            <small>수정시간: {{ reviewItem.updated_at }}</small>
+            <small>수정시간 {{ new Date(reviewItem.updated_at).toLocaleString() }}</small>
           </div>
           <div class="h5 bd-highlight">
             <b-icon
@@ -44,22 +44,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <b-card
-      :header="['작성자: ' + reviewItem.user.username, '★: ' + reviewItem.rank]"
-      text-variant="black"
-      header-tag="header"
-      :footer="[
-        '작성시간: ' + reviewItem.created_at,
-        '수정시간: ' + reviewItem.updated_at,
-      ]"
-      footer-tag="span"
-      footer-class="Object"
-      :title="reviewItem.title"
-      style="max-width: 30rem"
-    >
-      <b-card-text>내용: {{ reviewItem.content }}</b-card-text>
-    </b-card> -->
 
     <create-review v-if="show"></create-review>
     <create-comment

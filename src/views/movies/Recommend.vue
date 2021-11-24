@@ -33,6 +33,30 @@
           <h4>리뷰나 좋아요가 있어야 추천할 수 있어요</h4>
         </div>
     </div>
+
+    <div class="mb-5">
+      <div class="fw-bold text-start text-white">
+        <h3>트렌디한 윤성빈 개발자가 재밌게 본 영화</h3>
+      </div>
+        <div v-if="isLoadingByMD" class="fw-bold text-start text-white">
+          <h4>트렌디함은 이분을 못 따라가요!<div class="spinner-border" role="status"></div></h4>
+        </div>
+        <div v-else>
+          <movie-image-list  v-for="(recommendMovieListByYun, index) in recommendMovieListsByYun" :key="index" :movieList="recommendMovieListByYun"></movie-image-list>
+        </div>
+    </div>
+
+    <div class="mb-5">
+      <div class="fw-bold text-start text-white">
+        <h3>연말에 뭐하지? 상진수 개발자가 고민한 영화</h3>
+      </div>
+        <div v-if="isLoadingByMD" class="fw-bold text-start text-white">
+          <h4>연말에 코딩말고 영화나 볼까..<div class="spinner-border" role="status"></div></h4>
+        </div>
+        <div v-else>
+          <movie-image-list  v-for="(recommendMovieListBySang, index) in recommendMovieListsBySang" :key="index" :movieList="recommendMovieListBySang"></movie-image-list>
+        </div>
+    </div>
   </b-container>
 </template>
 
@@ -51,8 +75,11 @@ export default {
     return {
       recommendMovieByUsers: [],
       recommendMovieByReviews: [],
+      recommendMovieByYun: [],
+      recommendMovieBySang: [],
       isLoadingByUsers : true, 
       isLoadingByReviews: true,
+      isLoadingByMD: true,
     };
   },
   computed: {
@@ -62,7 +89,14 @@ export default {
     },
     recommendMovieListsByUsers(){
         return  _.chunk(this.recommendMovieByUsers, 15);
+    },
+    recommendMovieListsByYun(){
+      return _.chunk(this.recommendMovieByYun, 15)
+    },
+    recommendMovieListsBySang(){
+      return _.chunk(this.recommendMovieBySang, 15)
     }
+
   },
   created() {
     axios({
@@ -84,6 +118,19 @@ export default {
       .then((res) => {
         this.isLoadingByReviews = false
         this.recommendMovieByReviews = res.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/movies/recommend/md`,
+    }) 
+      .then((res) => {
+        this.isLoadingByMD = false
+        this.recommendMovieByYun = res.data.yun
+        this.recommendMovieBySang = res.data.sang
       })
       .catch((err) => {
         console.error(err);

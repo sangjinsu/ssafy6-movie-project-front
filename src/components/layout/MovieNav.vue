@@ -4,8 +4,20 @@
       small
       type="dark"
       style="background-color: black"
-      class="navbar-expand-md fw-bold d-flex bd-highlight mb-4 fixed-top"
+      class="
+        navbar-expand-md
+        fw-bold
+        fs-6
+        d-flex
+        bd-highlight
+        mb-4
+        fixed-top
+        align-items-center
+      "
     >
+      <b-navbar-brand>
+        <img src="../../assets/logo.png" alt="logo" width="50" height="50" />
+      </b-navbar-brand>
       <b-nav-item to="/movies" class="text-decoration-none p-2 bd-highlight"
         >Home</b-nav-item
       >
@@ -23,7 +35,7 @@
         class="ms-auto p-2"
       >
         <template #button-content>
-          <em style="color: white">User</em>
+          <em style="color: white"><b-avatar></b-avatar></em>
         </template>
 
         <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>

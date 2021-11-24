@@ -1,6 +1,6 @@
 <template>
   <div class="h2">
-    <b-icon
+    <!-- <b-icon
       icon="suit-heart"
       variant="danger"
       @click="likeMovie"
@@ -11,7 +11,13 @@
       variant="danger"
       @click="likeMovie"
       v-else
-    ></b-icon>
+    ></b-icon> -->
+    <span style="color: #ea4335" @click="likeMovie" v-if="!hasUser">
+      <i class="far fa-heart"></i>
+    </span>
+    <span style="color: #ea4335" @click="likeMovie" v-else>
+      <i class="fas fa-heart"></i>
+    </span>
   </div>
 </template>
 

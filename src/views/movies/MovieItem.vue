@@ -29,7 +29,7 @@
             <h5 class="text-start">
               {{ movieItem.original_title }}
             </h5>
-            <p class="card-text text-start" >
+            <p class="card-text text-start">
               <small>{{ movieItem.overview }}</small>
             </p>
             <h6 class="card-text text-start">
@@ -61,7 +61,7 @@
                 :pickUser="pickUser"
                 @add-pick="addPick"
                 @delete-pick="deletePick"
-                class="d-inline bd-highlight"
+                class="d-inline bd-highlight ms-2"
               ></pick-movie>
             </div>
           </div>
@@ -124,10 +124,10 @@ export default {
     };
   },
   beforeRouteUpdate(to, from, next) {
-    this.movieId = to.params.movie_id
-    this.fetchReview()
-    this.getMovieDetail()
-    next()
+    this.movieId = to.params.movie_id;
+    this.fetchReview();
+    this.getMovieDetail();
+    next();
   },
   methods: {
     fetchReview() {
@@ -158,7 +158,7 @@ export default {
     deletePick() {
       this.pickUserList.splice(this.pickUserList.indexOf(this.getUserPK), 1);
     },
-    getMovieDetail(){
+    getMovieDetail() {
       axios({
         method: "get",
         url: `${SERVER_URL}/movies/${this.movieId}`,
@@ -173,11 +173,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    }
+    },
   },
   created() {
-    this.fetchReview()
-    this.getMovieDetail()
+    this.fetchReview();
+    this.getMovieDetail();
   },
   computed: {
     ...mapGetters(["getUserPK"]),

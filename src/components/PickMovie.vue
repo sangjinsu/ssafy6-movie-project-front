@@ -1,7 +1,13 @@
 <template>
   <div class="h2">
-    <b-icon icon="plus" @click="pickMovie" v-if="!pickUser"></b-icon>
-    <b-icon icon="check2" @click="pickMovie" v-else></b-icon>
+    <!-- <b-icon icon="plus" @click="pickMovie" v-if="!pickUser"></b-icon>
+    <b-icon icon="check2" @click="pickMovie" v-else></b-icon> -->
+    <span @click="pickMovie" v-if="!pickUser" style="color: white">
+      <i class="fas fa-plus"></i>
+    </span>
+    <span @click="pickMovie" v-else style="color: #4285f4">
+      <i class="fas fa-check"></i>
+    </span>
   </div>
 </template>
 

@@ -2,11 +2,14 @@
   <b-container style="height: 100vh">
     <router-link
       :to="{ name: 'Signup' }"
-      class="text-decoration-none text-white float-end pt-5"
+      class="text-decoration-none text-white float-end"
     >
       <b-button class="btn-signup">Signup</b-button>
     </router-link>
 
+    <div class="position-absolute top-0 start-50 translate-middle-x pt-5">
+      <img src="@/assets/logo.png" alt="Logo" class="pt-5" />
+    </div>
     <div
       class="text-white h-100 d-flex align-items-center justify-content-center"
     >

@@ -11,7 +11,7 @@
     </div>
     <!-- <div style="content: '\00a0'; margin-top: 300px-img.offsetHeight"></div> -->
     <div
-      class="d-flex justify-content-start mt-1"
+      class="d-flex justify-content-start mt-1 ps-1"
       style="color: white; opacity: 0.7"
     >
       <small>{{ movie.title }}</small>

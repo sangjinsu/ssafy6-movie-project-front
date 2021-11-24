@@ -2,20 +2,22 @@
   <b-container style="height: 100vh">
     <router-link
       :to="{ name: 'Login' }"
-      class="text-decoration-none text-white float-end pt-5"
+      class="text-decoration-none text-white float-end"
     >
       <b-button class="btn-login">Login</b-button>
     </router-link>
-
     <div
       class="text-white h-100 d-flex align-items-center justify-content-center"
     >
+      <div class="position-absolute top-0 start-50 translate-middle-x pt-3">
+        <img src="@/assets/logo.png" alt="Logo" />
+      </div>
       <div style="background-color: #26282b" class="rounded p-5 w-50">
         <div>
           <div class="text-start">
             <h1>회원가입</h1>
           </div>
-   
+
           <div class="mb-3 text-start">
             <label for="username"></label>
             <input
@@ -27,19 +29,19 @@
             />
           </div>
 
-
           <!-- username validation -->
-          <div
-           v-if="usernameValidation.errors.length > 0 && !submitted"
-          >
-            <ul class="list-unstyled" v-for="error in usernameValidation.errors" :key="error.message">
+          <div v-if="usernameValidation.errors.length > 0 && !submitted">
+            <ul
+              class="list-unstyled"
+              v-for="error in usernameValidation.errors"
+              :key="error.message"
+            >
               <li>
                 {{ error }}
               </li>
-           </ul>
+            </ul>
           </div>
         </div>
-
 
         <div>
           <div class="text-start">
@@ -64,30 +66,36 @@
             />
           </div>
 
-          <div
-            v-if="passwordValidation.errors.length > 0 && !submitted"
-          >
-          <ul
-            v-for="error in passwordValidation.errors"
-            :key="error.message"
-            class="list-unstyled"
-           >
-            <li>
-              {{ error }}
-            </li>
-          </ul>
+          <div v-if="passwordValidation.errors.length > 0 && !submitted">
+            <ul
+              v-for="error in passwordValidation.errors"
+              :key="error.message"
+              class="list-unstyled"
+            >
+              <li>
+                {{ error }}
+              </li>
+            </ul>
           </div>
 
-      
           <div class="matches" v-if="notSamePasswords">
             <p>비밀번호가 일치하지 않습니다</p>
           </div>
         </div>
-        
+
         <div class="d-grid">
-          <b-button v-if='passwordsFilled && !notSamePasswords && passwordValidation.valid && usernameValidation.valid' @click="signup" class="btn-signup btn-block">계정 생성하기</b-button>
+          <b-button
+            v-if="
+              passwordsFilled &&
+              !notSamePasswords &&
+              passwordValidation.valid &&
+              usernameValidation.valid
+            "
+            @click="signup"
+            class="btn-signup btn-block"
+            >계정 생성하기</b-button
+          >
         </div>
-        
       </div>
     </div>
   </b-container>
@@ -203,5 +211,4 @@ export default {
   color: white;
   border: none;
 }
-
 </style>

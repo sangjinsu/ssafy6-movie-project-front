@@ -50,13 +50,13 @@ export default {
 </script>
 
 <style>
-.scale {
+/* .scale {
   transform: scale(1);
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
-  transition: all 0.3s ease-in-out; /* 부드러운 모션을 위해 추가*/
+  transition: all 0.3s ease-in-out;
   transition-delay: 0.2s;
 }
 .scale:hover {
@@ -67,5 +67,16 @@ export default {
   -o-transform: scale(1.1);
   position: absolute;
   z-index: 1;
+} */
+
+#id {
+  width: 200px;
+  height: 300px;
+}
+.scale:hover img {
+  border: 0.25vw solid rgba(255, 255, 255, 0.7);
+  /* transform: scale(1.2);
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.2s; */
 }
 </style>

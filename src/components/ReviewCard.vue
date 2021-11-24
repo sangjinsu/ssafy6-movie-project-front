@@ -1,11 +1,11 @@
 <template>
   <swiper-slide>
-    <div class="card-group" style="height: 15rem;">
-      <div
-        class="card text-white bg-dark"
-        @click="pushReviewItem(review.pk)"
-      >
-        <div class="card-header">★  {{ review.rank }}</div>
+    <div class="card-group" style="height: 15rem">
+      <div class="card text-white bg-dark" @click="pushReviewItem(review.pk)">
+        <div class="card-header">
+          <i class="fas fa-star me-2" style="color: yellow"></i>:
+          {{ review.rank }}
+        </div>
         <div class="card-body">
           <h5 class="card-title">
             <p class="fs-5">{{ sliceTitle }}</p>
@@ -34,12 +34,16 @@ export default {
     },
   },
   computed: {
-    sliceTitle(){
-      return this.review.title.length > 20 ?  this.review.title.slice(0, 17) +'...' : this.review.title
+    sliceTitle() {
+      return this.review.title.length > 20
+        ? this.review.title.slice(0, 17) + "..."
+        : this.review.title;
     },
-    sliceContent(){
-      return this.review.content.length > 100 ?  this.review.content.slice(0, 97) +'...' : this.review.content
-    }
+    sliceContent() {
+      return this.review.content.length > 100
+        ? this.review.content.slice(0, 97) + "..."
+        : this.review.content;
+    },
   },
   methods: {
     pushReviewItem(pk) {

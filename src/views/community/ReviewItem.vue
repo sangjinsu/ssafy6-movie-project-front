@@ -9,7 +9,8 @@
           작성자: {{ reviewItem.user.username }}
         </h5>
         <h5 class="d-flex align-items-center" style="margin-bottom: 0">
-          ★: {{ reviewItem.rank }}
+          <i class="fas fa-star me-2" style="color: yellow"></i>:
+          {{ reviewItem.rank }}
         </h5>
       </div>
       <div class="card-body" style="word-break: break-all">
@@ -22,11 +23,17 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-start">
-          <small>작성시간  {{ new Date(reviewItem.created_at).toLocaleString() }}</small>
+          <small>
+            작성시간
+            {{ new Date(reviewItem.created_at).toLocaleString() }}
+          </small>
         </div>
         <div class="d-flex bd-highlight">
           <div class="me-auto bd-highlight">
-            <small>수정시간 {{ new Date(reviewItem.updated_at).toLocaleString() }}</small>
+            <small
+              >수정시간
+              {{ new Date(reviewItem.updated_at).toLocaleString() }}</small
+            >
           </div>
           <div class="h5 bd-highlight">
             <b-icon

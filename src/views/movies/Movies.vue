@@ -2,7 +2,10 @@
   <b-container v-if="isLoading">
     <div class="mb-5">
       <p class="fs-3 fw-bold text-white">
-        지금 인기영화<i class="fas fa-star ms-2" style="color: yellow"></i>
+        지금 인기영화
+        <span style="color: gold">
+          <i class="fas fa-trophy"></i>
+        </span>
       </p>
       <top-movie-image-list :movieList="threeTopMovies"></top-movie-image-list>
     </div>

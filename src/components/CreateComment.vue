@@ -12,7 +12,11 @@
           placeholder="내용을 입력하세요."
           style="width: 600px"
         />
-        <button @click="createComment">+</button>
+
+        <!-- <button @click="createComment">+</button> -->
+        <span style="font-size: 1.5em; color: white">
+          <i class="fas fa-plus-square" @click="createComment"></i>
+        </span>
       </b-col>
     </b-row>
   </div>

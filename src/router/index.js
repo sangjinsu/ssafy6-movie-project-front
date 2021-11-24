@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Home.vue'),
+    component: () => import('@/views/accounts/Login.vue'),
     beforeEnter: beforeAuth(false),
   },
   {

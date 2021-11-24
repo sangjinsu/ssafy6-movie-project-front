@@ -6,8 +6,10 @@
         :src="posterPath"
         class="rounded mx-auto d-block"
         @dblclick="pushMovieItem"
+        style="height: 300px; width: 200px"
       />
     </div>
+    <!-- <div style="content: '\00a0'; margin-top: 300px-img.offsetHeight"></div> -->
     <div
       class="d-flex justify-content-start mt-1"
       style="color: white; opacity: 0.7"
@@ -40,6 +42,7 @@ export default {
   },
   computed: {
     posterPath() {
+      // console.log(this.movie.poster_path.offsetHeight);
       return `https://image.tmdb.org/t/p/w200${this.movie.poster_path}`;
     },
   },
@@ -62,5 +65,7 @@ export default {
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
+  position: absolute;
+  z-index: 1;
 }
 </style>

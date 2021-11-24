@@ -123,6 +123,12 @@ export default {
       poster_path: null,
     };
   },
+  beforeRouteUpdate(to, from, next) {
+    this.movieId = to.params.movie_id
+    this.fetchReview()
+    this.getMovieDetail()
+    next()
+  },
   methods: {
     fetchReview() {
       axios({
@@ -152,23 +158,26 @@ export default {
     deletePick() {
       this.pickUserList.splice(this.pickUserList.indexOf(this.getUserPK), 1);
     },
+    getMovieDetail(){
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/movies/${this.movieId}`,
+      })
+        .then((res) => {
+          this.movieItem = res.data;
+          this.likeUserList = this.movieItem.like_users;
+          this.pickUserList = this.movieItem.pick_users;
+          this.genres = this.movieItem.genres;
+          this.poster_path = `https://image.tmdb.org/t/p/w200${this.movieItem.poster_path}`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   },
   created() {
-    this.fetchReview();
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/movies/${this.$route.params.movie_id}`,
-    })
-      .then((res) => {
-        this.movieItem = res.data;
-        this.likeUserList = this.movieItem.like_users;
-        this.pickUserList = this.movieItem.pick_users;
-        this.genres = this.movieItem.genres;
-        this.poster_path = `https://image.tmdb.org/t/p/w200${this.movieItem.poster_path}`;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.fetchReview()
+    this.getMovieDetail()
   },
   computed: {
     ...mapGetters(["getUserPK"]),

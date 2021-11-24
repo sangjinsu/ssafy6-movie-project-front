@@ -28,6 +28,14 @@
         >Recommend</b-nav-item
       >
 
+      <b-nav-form @submit.prevent="onSubmit">
+        <b-form-input :select-size="4"  list="movie-list" v-model="searchItem" ></b-form-input>
+
+        <datalist id="movie-list"  >
+          <option  v-for="(movie, index) in movies" :key="index">{{ movie.title }}</option>
+        </datalist>
+      </b-nav-form>
+
       <b-nav-item-dropdown
         id="my-nav-dropdown"
         toggle-class="nav-link-custom"
@@ -62,6 +70,12 @@ import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: "MovieNav",
+  data() {
+    return {
+      searchItem: '',
+      movies: []
+    }
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -76,11 +90,28 @@ export default {
         this.$router.push({ name: "Signup" });
       });
     },
-    search(event) {
-      event.preventDefault();
-      console.log(this.searchMovie);
-    },
+    onSubmit(){
+      const movie = this.movies.find(movie => movie.title === this.searchItem)
+      
+      if(!movie) return
+
+      this.$router.push({
+        name: "MovieItem",
+        params: { movie_id: movie.pk },
+      })
+    }
   },
+  created(){
+    axios({
+      method: 'get',
+      url: `${SERVER_URL}/movies/name`
+    }).then(res=>{
+      console.log(res.data)
+      this.movies = Object.freeze(res.data)
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 };
 </script>
 

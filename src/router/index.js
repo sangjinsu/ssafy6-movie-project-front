@@ -92,7 +92,7 @@ const routes = [
     beforeEnter: beforeAuth(true),
   },
   {
-    path: '/*',
+    path: '*',
     name: 'Extra',
     component: () => import('@/views/Home.vue'),
     beforeEnter: beforeAuth(false),

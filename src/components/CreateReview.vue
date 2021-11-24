@@ -4,14 +4,20 @@
       <b-form @submit="onSubmit" style="color: white">
         <b-row class="my-1">
           <b-col sm="2">
-            <label>제목:</label>
+            <label for="title-live">제목:</label>
           </b-col>
           <b-col sm="10">
             <b-form-input
+              id="title-live"
               v-model.trim="forms.title"
               type="text"
               placeholder="100자 이내"
+              :state="titleState"
+              aria-describedby="title-live-feedback"
             ></b-form-input>
+            <b-form-invalid-feedback id="title-live-feedback">
+              100자 이내
+            </b-form-invalid-feedback>
           </b-col>
         </b-row>
         <b-row class="my-1">
@@ -69,17 +75,28 @@ export default {
   data() {
     return {
       forms: {
-        title: null,
-        content: null,
+        title: '',
+        content: '',
         rank: null,
       },
     };
+  },
+  computed: {
+    titleState(){
+      if(this.forms.title.length <= 100){
+        return null
+      }
+      return false
+    }
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
       if (!this.forms.title || !this.forms.content || !this.forms.rank) {
-        return;
+        return
+      }
+      if (this.forms.title.length > 100){
+        return
       }
       axios({
         method: "post",
@@ -90,10 +107,8 @@ export default {
           rank: this.forms.rank,
         },
       })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.$emit("create-review");
-          this.forms = "";
         })
         .catch((err) => {
           console.log(err);

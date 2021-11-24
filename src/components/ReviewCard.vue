@@ -1,6 +1,6 @@
 <template>
   <swiper-slide>
-    <div class="card-group" style="height: 20rem;">
+    <div class="card-group" style="height: 15rem;">
       <div
         class="card text-white bg-dark"
         @click="pushReviewItem(review.pk)"
@@ -8,10 +8,10 @@
         <div class="card-header">★  {{ review.rank }}</div>
         <div class="card-body">
           <h5 class="card-title">
-            <small>제목: </small>{{ sliceTitle }}
+            <p class="fs-5">{{ sliceTitle }}</p>
           </h5>
           <p class="card-text">
-            <small>내용: </small>{{ sliceContent }}
+            {{ sliceContent }}
           </p>
         </div>
       </div>

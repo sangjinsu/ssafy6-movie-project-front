@@ -20,9 +20,9 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: 3,
         spaceBetween: 5,
-        slidesPerGroup: 4,
+        slidesPerGroup: 3,
         loopFillGroupWithBlank: true,
         pagination: {
           el: ".swiper-pagination",

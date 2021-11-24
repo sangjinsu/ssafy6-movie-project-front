@@ -1,5 +1,5 @@
 <template>
-  <div class="container h-100">
+  <div class="container h-100" v-if="movieItem">
     <div
       class="
         card
@@ -15,7 +15,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <img
-            :src="this.poster_path"
+            :src="poster_path"
             alt="Image"
             class="img-fluid rounded-start"
             style="height: 100%"
@@ -23,22 +23,22 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h4 class="card-title d-flex justify-content-start">
+            <h4 class="card-title text-start">
               {{ movieItem.title }}
             </h4>
-            <h5 class="d-flex justify-content-start">
+            <h5 class="text-start">
               {{ movieItem.original_title }}
             </h5>
-            <p class="card-text">
+            <p class="card-text text-start" >
               <small>{{ movieItem.overview }}</small>
             </p>
-            <h6 class="card-text d-flex justify-content-start">
+            <h6 class="card-text text-start">
               <small>인기도: {{ movieItem.popularity }}</small>
             </h6>
-            <h6 class="card-text d-flex justify-content-start">
+            <h6 class="card-text text-start">
               <small>공개일: {{ movieItem.release_date }}</small>
             </h6>
-            <h6 class="card-text d-flex justify-content-start">
+            <h6 class="card-text text-start">
               <small>평점: {{ movieItem.vote_average }}</small>
             </h6>
 
@@ -160,7 +160,6 @@ export default {
       url: `${SERVER_URL}/movies/${this.$route.params.movie_id}`,
     })
       .then((res) => {
-        console.log(res.data);
         this.movieItem = res.data;
         this.likeUserList = this.movieItem.like_users;
         this.pickUserList = this.movieItem.pick_users;

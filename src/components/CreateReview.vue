@@ -10,7 +10,7 @@
             <b-form-input
               v-model.trim="forms.title"
               type="text"
-              size="sm"
+              placeholder="100자 이내"
             ></b-form-input>
           </b-col>
         </b-row>

@@ -1,17 +1,17 @@
 <template>
   <swiper-slide>
-    <div class="card-group">
+    <div class="card-group" style="height: 20rem;">
       <div
-        class="card text-white bg-dark mb-3 h-100"
+        class="card text-white bg-dark"
         @click="pushReviewItem(review.pk)"
       >
-        <div class="card-header">★: {{ this.review.rank }}</div>
+        <div class="card-header">★  {{ review.rank }}</div>
         <div class="card-body">
           <h5 class="card-title">
-            <small>제목: </small>{{ this.review.title }}
+            <small>제목: </small>{{ sliceTitle }}
           </h5>
           <p class="card-text">
-            <small>내용: </small>{{ this.review.content }}
+            <small>내용: </small>{{ sliceContent }}
           </p>
         </div>
       </div>
@@ -33,9 +33,16 @@ export default {
       required: true,
     },
   },
+  computed: {
+    sliceTitle(){
+      return this.review.title.length > 20 ?  this.review.title.slice(0, 17) +'...' : this.review.title
+    },
+    sliceContent(){
+      return this.review.content.length > 100 ?  this.review.content.slice(0, 97) +'...' : this.review.content
+    }
+  },
   methods: {
     pushReviewItem(pk) {
-      console.log("ok");
       this.$router.push({
         name: "ReviewItem",
         params: { review_id: pk },

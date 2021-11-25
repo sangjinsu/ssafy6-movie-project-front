@@ -4,6 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default new Vuex.Store({
   state: {
     token: null,
@@ -73,7 +75,7 @@ export default new Vuex.Store({
     getLastestMovies({ commit }) {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/movies',
+        url: `${SERVER_URL}/movies`,
       })
         .then((res) => commit('GET_LASTEST_MOVIES', res.data))
         .catch((err) => console.error(err))
@@ -81,7 +83,7 @@ export default new Vuex.Store({
     getTopMovies({ commit }) {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/movies/top',
+        url: `${SERVER_URL}/movies/top`,
       })
         .then((res) => commit('GET_TOP_MOVIES', res.data))
         .catch((err) => console.error(err))
@@ -89,7 +91,7 @@ export default new Vuex.Store({
     getUser({ commit }) {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/accounts/user',
+        url: `${SERVER_URL}/accounts/user`,
       })
         .then((res) => commit('GET_USER', res.data))
         .catch((err) => console.error(err))

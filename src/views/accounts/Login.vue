@@ -10,6 +10,7 @@
     <div class="position-absolute top-0 start-50 translate-middle-x pt-5">
       <img src="@/assets/logo.png" alt="Logo" class="pt-5" />
     </div>
+
     <div
       class="text-white h-100 d-flex align-items-center justify-content-center"
     >
@@ -40,13 +41,16 @@
           <b-button @click="login" class="btn-login btn-block">LOGIN</b-button>
         </div>
       </div>
+      <hr>
+      <a :href="kakaoLoginURL">kakao</a>
     </div>
   </b-container>
 </template>
 
 <script>
 import axios from "axios";
-const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const CLIENT_URL = process.env.VUE_APP_CLIENT_URL
 
 export default {
   name: "Login",
@@ -58,8 +62,15 @@ export default {
       },
     };
   },
+  computed: {
+    kakaoLoginURL(){
+      const REST_API_KEY = process.env.VUE_APP_REST_API_KEY
+      const REDIRECT_URI = `${CLIENT_URL}/oauth/callback/kakao`
+      return `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    }
+  },
   methods: {
-    login: function () {
+    login() {
       axios({
         method: "post",
         url: `${SERVER_URL}/accounts/api-token-auth/`,

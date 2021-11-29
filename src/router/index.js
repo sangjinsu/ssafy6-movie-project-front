@@ -92,6 +92,12 @@ const routes = [
     beforeEnter: beforeAuth(true),
   },
   {
+    path: '/oauth/callback/kakao',
+    name: 'KakaoAuth',
+    component: () => import('@/views/accounts/KakaoAuth.vue'),
+    beforeEnter: beforeAuth(false),
+  },
+  {
     path: '*',
     name: 'Extra',
     component: () => import('@/views/Home.vue'),

@@ -105,7 +105,7 @@ export default {
 
     axios({
       method: "get",
-      url: `${SERVER_URL}/movies/like`,
+      url: "http://127.0.0.1:8000/movies/like",
     })
       .then((res) => {
         this.likeMovies = res.data;

@@ -40,9 +40,12 @@
         <div class="d-grid gap-2">
           <b-button @click="login" class="btn-login btn-block">LOGIN</b-button>
         </div>
+
+        <a :href="kakaoLoginURL">
+          <img class="img-fluid mt-3" src="../../assets/kakao_login_medium_wide.png" alt="카카오 로그인 버튼">
+        </a>
       </div>
-      <hr>
-      <a :href="kakaoLoginURL">kakao</a>
+      
     </div>
   </b-container>
 </template>

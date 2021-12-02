@@ -82,4 +82,8 @@ $ npm run server -- --port 3001
 
 ---
 
-<embed src="https://drive.google.com/file/d/1Y0zHjhP0Lgr4D57ZjsczwoWaMdQtiZUe/preview"  width= "720px" height="480px" allow="autoplay" allowfullscreen></embed>
+### 보고서
+
+![최종프로젝트발표](README.assets/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%B0%9C%ED%91%9C.gif)
+
+[구글 드라이브](https://drive.google.com/file/d/1Y0zHjhP0Lgr4D57ZjsczwoWaMdQtiZUe/view?usp=sharing)

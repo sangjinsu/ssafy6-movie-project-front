@@ -82,4 +82,4 @@ $ npm run server -- --port 3001
 
 ---
 
-<iframe src="https://drive.google.com/file/d/1Y0zHjhP0Lgr4D57ZjsczwoWaMdQtiZUe/preview" width="640" height="480" allow="autoplay"></iframe>
+<embed src="https://drive.google.com/file/d/1Y0zHjhP0Lgr4D57ZjsczwoWaMdQtiZUe/preview"  width= "720px" height="480px" allow="autoplay" allowfullscreen></embed>

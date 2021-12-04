@@ -1,33 +1,25 @@
-# &#127916; KINOPIO
+# &#127916; KINOPIO <https://kinopio.pub>
 
->키노피오는 평가데이터에 기반한 영화 평가/추천서비스를 제공하는 커뮤니티입니다.
+>키노피오는 평가데이터에 기반한 영화 평가/추천서비스를 제공하는 커뮤니티입니다
 >
 
-### &#128197; 프로젝트 기간
-
----
+## &#128197; 프로젝트 기간
 
 * 2021.11.17(수) - 2021.11.26(금)
 
-### :couple: 팀원 및 역할 분담
-
----
+## :couple: 팀원 및 역할 분담
 
 * 상진수: 백엔드 설계 및 개발, 영화 추천 알고리즘, 영화 검색 기능, vue navigation guard, 프로필, 서치, 추천, 로그인 전 페이지, 카카오 OAuth 로그인
 * 윤성빈: 프론트엔드 설계 및 개발, 리뷰, 댓글 CRUD
 
-### :wrench: 기술 스택
-
----
+## :wrench: 기술 스택
 
 * Front-end
   * vue : 4.5.15
 * Back-end
   * Django REST Framework
 
-### :bulb: 핵심 기능
-
----
+## :bulb: 핵심 기능
 
 * Admin
   * 유저 관리 / 영화 등록 / 수정 / 삭제 권한
@@ -44,9 +36,9 @@
 * 기타
   * 11개의 URL 및 페이지
 
-### :computer: installation
+## :computer: installation
 
----
+* back
 
 ```python
 $ pip install -r requirements.txt
@@ -58,6 +50,8 @@ $ python manage.py loaddata movies.json
 $ python manage.py runserver
 ```
 
+* front
+
 ```vue
 $ npm install
 ```
@@ -66,15 +60,13 @@ $ npm install
 $ npm run server -- --port 3001
 ```
 
-### :sparkles: 와이어프레임
+## :sparkles: 와이어프레임
 
 ![image-20211204132650851](md-images/image-20211204132650851.png)
 
 ![image-20211204132713138](md-images/image-20211204132713138.png)
 
-### :open_file_folder: Vue 프로젝트 구조
-
----
+## :open_file_folder: Vue 프로젝트 구조
 
 * accounts
   * 카카오인증로그인
@@ -92,9 +84,9 @@ $ npm run server -- --port 3001
   * 영화 검색
   * 홈화면
 
-### :mag_right: 기능 구현
+## :mag_right: 기능 구현
 
-#### 로그인
+### 로그인
 
 ![image-20211204141212363](md-images/image-20211204141212363.png)
 
@@ -102,13 +94,13 @@ $ npm run server -- --port 3001
 * REST API를 사용한 카카오 로그인은 인가 코드 받기, 토큰 받기의 두 단계를 거칩니다. 먼저 인가 코드를 받고, 그 인가 코드로 토큰을 요청해야 합니다.
 * 인가 코드 요청 단계에서 클라이언트에 카카오계정 정보를 통해 사용자를 인증하는 과정을 거칩니다. 
 
-#### 회원가입
+### 회원가입
 
 ![signup](md-images/signup.gif)
 
 * 회원가입 유효성 검사를 통해 사용자가 회원가입 시 정보를 잘못 입력하는 경우를 막아줄 수 있습니다.
 
-#### 홈
+### 홈
 
 ![home](md-images/home-16385953587352.gif)
 
@@ -119,13 +111,13 @@ $ npm run server -- --port 3001
   * 포스터 위에 마우스를 올리면 애니메이션 효과가 작동합니다.
   * 포스터를 더블클릭하면 해당 영화의 상세페이지로 넘어갑니다.
 
-#### 영화 검색
+### 영화 검색
 
 ![search](md-images/search.gif)
 
 * 영화 제목을 입력하면 DB에 저장되어있는 'title' 과 동일한 영화의 상세페이지로 vue router 이동 합니다.
 
-#### 영화 상세 페이지
+### 영화 상세 페이지
 
 ![review](md-images/review.gif)
 
@@ -137,7 +129,7 @@ $ npm run server -- --port 3001
 
 * 리뷰와 댓글 모두 작성자 본인만 수정, 삭제할 수 있습니다.
 
-#### 영화추천
+### 영화추천
 
 ![image-20211204151452738](md-images/image-20211204151452738.png)
 
@@ -150,7 +142,7 @@ $ npm run server -- --port 3001
 * 모든 영화 리스트는 슬라이더 형식으로 사용자가 직접 넘기면서 볼 수 있습니다.
 * 포스터를 더블 클릭하면 해당 영화 상세페이지로 넘어갑니다.
 
-#### 영화 탐색
+### 영화 탐색
 
 ![research](md-images/research.gif)
 
@@ -158,31 +150,29 @@ $ npm run server -- --port 3001
 * select 창으로 장르를 고를 수도 있고,  직접 원하는 장르를 입력해서 검색할 수도 있습니다.
 * 장르를 검색하면 애니메이션 효과로 해당 장르의 영화 리스트들이 나타납니다.
 
-#### 프로필
+### 프로필
 
 ![image-20211204153535074](md-images/image-20211204153535074.png)
 
 * 찜한 영화, 좋아요한 영화, 작성한 리뷰와 댓글들을 볼 수 있습니다.
 * 작성한 리뷰와 댓글이 많아지면 페이지네이션으로 이동할 수 있습니다.
 
-#### 회원탈퇴
+### 회원탈퇴
 
 ![signout](md-images/signout.gif)
 
 * 회원탈퇴를 누르면 경고문구가 alert로 나타납니다.
 
-### :pencil2: 그 외 추가기능
+## :pencil2: 그 외 추가기능
 
-#### 안전장치
+### 안전장치
 
 ![safe1](md-images/safe1.gif)
 
 * 존재하지 않는 url를 입력할 경우 메인페이지로 이동합니다.
 * 로그인을 하지 않은 상태에서 커뮤니티 url로 강제 접속할 경우 로그인 페이지로 이동합니다.
 
----
-
-### 보고서
+## 보고서
 
 ![최종프로젝트발표](README.assets/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%B0%9C%ED%91%9C.gif)
 

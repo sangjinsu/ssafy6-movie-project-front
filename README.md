@@ -68,11 +68,9 @@ $ npm run server -- --port 3001
 
 ### :sparkles: 와이어프레임
 
-![image-20211204132650851](C:/Users/seongbiny/Desktop/final/final-pjt-front/client/md-images/image-20211204132650851.png)
+![image-20211204132650851](md-images/image-20211204132650851.png)
 
-
-
-![image-20211204132713138](C:/Users/seongbiny/Desktop/final/final-pjt-front/client/md-images/image-20211204132713138.png)
+![image-20211204132713138](md-images/image-20211204132713138.png)
 
 ### :open_file_folder: Vue 프로젝트 구조
 
